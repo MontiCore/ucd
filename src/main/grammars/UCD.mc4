@@ -13,7 +13,7 @@
  *  * MCBasicTypes for reusing import statements and package declarations.
  *  * CommonExpressions for reusing expressions that can be used as 
  *    preconditions for use cases or conditions on extend relations. 
- *  * MCCommonLiterals for reusing standard literals (i.e., BooleanLiteral)
+ *  * MCCommonLiterals for reusing literals (i.e., BooleanLiteral).
  */
 grammar UCD extends de.monticore.symbols.BasicSymbols, 
                     de.monticore.types.MCBasicTypes, 
