@@ -1,0 +1,41 @@
+/* (c) https://github.com/MontiCore/monticore */
+
+grammar UCD extends de.monticore.symbols.BasicSymbols, 
+                    de.monticore.types.MCBasicTypes, 
+                    de.monticore.expressions.CommonExpressions, 
+                    de.monticore.literals.MCCommonLiterals {
+
+  UCDArtifact =
+    MCPackageDeclaration
+    MCImportStatement*
+    UseCaseDiagram;
+
+  UseCaseDiagram implements Diagram =
+    "usecasediagram" Name "{"
+      UCDElement*
+    "}";
+
+  interface UCDElement;
+
+  symbol UCDUseCase implements UCDElement =
+    "usecase" Name
+    ("[" Expression "]")?
+    ("extends" super:(Name || ",")+)? 
+    ";";
+
+  symbol UCDActor implements UCDElement =
+    "actor" Name
+    ("extends" super:(Name || ",")+)? 
+    ";";
+
+  UCDExtend implements UCDElement =
+    "extend" src:Name "->" trg:Name
+    ("[" Expression "]")? 
+    ";";
+
+  UCDInclude implements UCDElement =
+    "include" src:Name "->" trg:Name ";";
+
+  UCDAssociation implements UCDElement =
+    "association" actor:Name "--" uc:Name ";";
+}
