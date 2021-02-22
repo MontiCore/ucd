@@ -1,0 +1,31 @@
+package parser;
+
+usecasediagram SwimmyFish {
+  actor Player;
+  actor Server;
+
+  usecase Play;
+  association Player -- Play;
+
+  usecase ShowAd;
+  association Server -- ShowAd;
+  extend ShowAd -> Play [!premiumPlayer];
+
+  usecase CreditCard extends Pay;
+
+  usecase Bank extends Pay;
+
+  usecase ChangeProfilePic;
+  association Player -- ChangeProfilePic;
+
+  usecase CheckPremium;
+
+  usecase RegisterScore;
+  association Server -- RegisterScore;
+  extend RegisterScore -> Play [gameFinished];
+
+  usecase Pay;
+  association Player -- Pay;
+  include Pay -> CheckPremium;
+
+}
