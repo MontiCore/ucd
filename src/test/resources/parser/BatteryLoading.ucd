@@ -31,7 +31,7 @@ usecasediagram BatteryLoading {
   association Car -- Loading;
   association LoadingStation -- Loading;
 
-  usecase FastLoading;
+  usecase FastLoading [isFastLoadingStation];
   association Car -- FastLoading;
   association LoadingStation -- FastLoading;
   extend FastLoading -> Loading [isFastLoadingStation];

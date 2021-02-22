@@ -15,7 +15,7 @@ usecasediagram SwimmyFish {
 
   usecase Bank extends Pay;
 
-  usecase ChangeProfilePic;
+  usecase ChangeProfilePic [premiumPlayer];
   association Player -- ChangeProfilePic;
 
   usecase CheckPremium;
