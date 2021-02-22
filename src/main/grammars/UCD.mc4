@@ -1,41 +1,108 @@
 /* (c) https://github.com/MontiCore/monticore */
 
+
+/*
+ * This grammar contains the basic constituents to define textual
+ * representations of use case diagrams (UCDs).
+ * SDs are especially suited for the modeling of tests.
+ *
+ * This grammar defines the syntax for UCD artifacts, UCDs, use cases,
+ * actors, extend relations, includes relations, and associations between 
+ * use cases and actors.
+ *
+ * This grammar extends the grammar
+ *  * BasicSymbols for reusing the Diagram symbol kind.
+ *  * MCBasicTypes for reusing import statements and package declarations.
+ *  * CommonExpressions for reusing expressions that can be used as 
+ *    preconditions for use cases or conditions on extend relations. 
+ *  * MCCommonLiterals for reusing standard literals (i.e., BooleanLiteral)
+ */
 grammar UCD extends de.monticore.symbols.BasicSymbols, 
                     de.monticore.types.MCBasicTypes, 
                     de.monticore.expressions.CommonExpressions, 
                     de.monticore.literals.MCCommonLiterals {
 
+  /**
+   * An artifact containing a use case diagram.
+   * @attribute MCPackageDeclaration The package of the use case diagram.
+   * @attribute MCImportStatement The import statements of the diagram
+   * @attribute UseCaseDiagram The use case diagram in the artifact.
+   */
   UCDArtifact =
     MCPackageDeclaration
     MCImportStatement*
     UseCaseDiagram;
 
+  /**
+   * A use case diagram. 
+   * Each use case diagram introduces a Diagram symbol.
+   * @attribute Name The name of the use case diagram.
+   * @attribute UCDElement Elements contained in the diagram. 
+   */ 
   UseCaseDiagram implements Diagram =
     "usecasediagram" Name "{"
       UCDElement*
     "}";
 
+  /**
+   * Elements contained in use case diagrams. 
+   */ 
   interface UCDElement;
 
+  /**
+   * An use case.
+   * Each use case introduces an UCDUseCaseSymbol.
+   * @attribute Name The name of the use case.
+   * @attribute Expression Precondition that must be satisfied to execute 
+   *                       the use case. Variables used in the expression 
+   *                       are interpreted to be of type boolean and are 
+   *                       implicitly introduced by their usage. 
+   * @attribute super Names of use cases extended by the use case.
+   */
   symbol UCDUseCase implements UCDElement =
     "usecase" Name
     ("[" Expression "]")?
     ("extends" super:(Name || ",")+)? 
     ";";
 
+  /**
+   * An actor. 
+   * @attribute Name The name of the actor.
+   * @attribute super Names of the actors extended by the actor. 
+   */
   symbol UCDActor implements UCDElement =
     "actor" Name
     ("extends" super:(Name || ",")+)? 
     ";";
 
+  /**
+   * An element of the extend relation between use cases.
+   * @attribute src Name of the extending use case.
+   * @attribute trg Name of the extended use case. 
+   * @attribute Expression Condition that must be satisfied for the 
+   *            to execute the extending use case when the extended use
+   *            case is executed. Variables used in the expression are 
+   *            interpreted to be of type boolean and are implicitly 
+   *            introduced by their usage. 
+   */
   UCDExtend implements UCDElement =
     "extend" src:Name "->" trg:Name
     ("[" Expression "]")? 
     ";";
 
+  /**
+   * An element of the include relation between use cases. 
+   * @attribute src Name of the including use case.
+   * @attribute trg Name of the included use case.
+   */ 
   UCDInclude implements UCDElement =
     "include" src:Name "->" trg:Name ";";
 
+  /** 
+   * An association between an actor an an use case.
+   * @attribute actor Name of the actor of the association.
+   * @attribute uc Name of the use case of the association.
+   */
   UCDAssociation implements UCDElement =
     "association" actor:Name "--" uc:Name ";";
 }
