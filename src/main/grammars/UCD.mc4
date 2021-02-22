@@ -23,7 +23,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
   /**
    * An artifact containing a use case diagram.
    * @attribute MCPackageDeclaration The package of the use case diagram.
-   * @attribute MCImportStatement The import statements of the diagram
+   * @attribute MCImportStatement The import statements of the diagram.
    * @attribute UseCaseDiagram The use case diagram in the artifact.
    */
   UCDArtifact =
@@ -77,8 +77,8 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    * An element of the extend relation between use cases.
    * @attribute src Name of the extending use case.
    * @attribute trg Name of the extended use case. 
-   * @attribute Expression Condition that must be satisfied for the 
-   *            to execute the extending use case when the extended use
+   * @attribute Expression Condition that must be satisfied to
+   *            execute the extending use case when the extended use
    *            case is executed. Variables used in the expression are 
    *            interpreted to be of type boolean and are implicitly 
    *            introduced by their usage. 
@@ -97,7 +97,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
     "include" src:Name "->" trg:Name ";";
 
   /** 
-   * An association between an actor an an use case.
+   * An association between an actor and an use case.
    * @attribute actor Name of the actor of the association.
    * @attribute uc Name of the use case of the association.
    */
