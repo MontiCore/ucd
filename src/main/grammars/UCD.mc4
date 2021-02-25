@@ -51,56 +51,45 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    * An use case.
    * Each use case introduces an UCDUseCaseSymbol.
    * @attribute Name The name of the use case.
-   * @attribute Expression Precondition that must be satisfied to execute 
-   *                       the use case. Variables used in the expression 
-   *                       are interpreted to be of type boolean and are 
-   *                       implicitly introduced by their usage. 
+   * @attribute Expression Precondition that must be satisfied to execute
+   *            the use case. Variables used in the expression are
+   *            interpreted to be of type boolean and are implicitly
+   *            introduced by their usage.
    * @attribute super Names of use cases extended by the use case.
+   * @attribute UCDConstrainedUC List of use cases to which there exists an
+   *            extend or an include.
    */
   symbol UCDUseCase implements UCDElement =
-    "usecase" Name
-    ("[" Expression "]")?
-    ("extends" super:(Name || ",")+)? 
+    Name ("[" Expression "]")?
+    ("extends" super:(Name || ",")+)?
+    ("-->" UCDConstrainedUC+ )?
     ";";
+
+  /**
+   * An extend or an include used in UCDUseCase.
+   * If the Expression is present, then the UCDConstrainedUC usage
+   * represents an extend. Otherwise, it represents an include.
+   * @attribute Name Target use case name of the extend or include.
+   * @attribute Expression Condition that must be satisfied to execute the
+   *            extending use case when the extended use case is executed.
+   *            Variables used in the expression are interpreted to be of
+   *            type boolean and are implicitly introduced by their usage.
+   */
+  UCDConstrainedUC =
+    Name ("[" Expression "]")?;
 
   /**
    * An actor. 
    * @attribute Name The name of the actor.
-   * @attribute super Names of the actors extended by the actor. 
+   * @attribute super Names of the actors extended by the actor.
+   * @attribute uc Names of use cases associated to the actor. The use
+   *            cases are implicitly defined by their usage. Thus,
+   *            UCDUseCaseSymbol may be defined (if they are not already
+   *            defined via the usage of UCDUseCase).
    */
   symbol UCDActor implements UCDElement =
-    "actor" Name
-    ("extends" super:(Name || ",")+)? 
+    "@" Name
+    ("extends" super:(Name || ",")+)?
+    ("--" uc:(Name || ",")+)?
     ";";
-
-  /**
-   * An element of the extend relation between use cases.
-   * @attribute src Name of the extending use case.
-   * @attribute trg Name of the extended use case. 
-   * @attribute Expression Condition that must be satisfied to
-   *            execute the extending use case when the extended use
-   *            case is executed. Variables used in the expression are 
-   *            interpreted to be of type boolean and are implicitly 
-   *            introduced by their usage. 
-   */
-  UCDExtend implements UCDElement =
-    "extend" src:Name "->" trg:Name
-    ("[" Expression "]")? 
-    ";";
-
-  /**
-   * An element of the include relation between use cases. 
-   * @attribute src Name of the including use case.
-   * @attribute trg Name of the included use case.
-   */ 
-  UCDInclude implements UCDElement =
-    "include" src:Name "->" trg:Name ";";
-
-  /** 
-   * An association between an actor and an use case.
-   * @attribute actor Name of the actor of the association.
-   * @attribute uc Name of the use case of the association.
-   */
-  UCDAssociation implements UCDElement =
-    "association" actor:Name "--" uc:Name ";";
 }
