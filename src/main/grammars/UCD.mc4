@@ -55,13 +55,13 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    *            the use case. Variables used in the expression are
    *            interpreted to be of type boolean and are implicitly
    *            introduced by their usage.
-   * @attribute super Names of use cases extended by the use case.
+   * @attribute sup Names of use cases extended by the use case.
    * @attribute UCDConstrainedUC List of use cases to which there exists an
    *            extend or an include.
    */
   symbol UCDUseCase implements UCDElement =
     Name ("[" Expression "]")?
-    ("extends" super:(Name || ",")+)?
+    ("extends" sup:(Name@UCDUseCase || ",")+)?
     ("-->" UCDConstrainedUC+ )?
     ";";
 
@@ -76,12 +76,12 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    *            type boolean and are implicitly introduced by their usage.
    */
   UCDConstrainedUC =
-    Name ("[" Expression "]")?;
+    Name@UCDUseCase ("[" Expression "]")?;
 
   /**
    * An actor. 
    * @attribute Name The name of the actor.
-   * @attribute super Names of the actors extended by the actor.
+   * @attribute sup Names of the actors extended by the actor.
    * @attribute uc Names of use cases associated to the actor. The use
    *            cases are implicitly defined by their usage. Thus,
    *            UCDUseCaseSymbol may be defined (if they are not already
@@ -89,7 +89,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    */
   symbol UCDActor implements UCDElement =
     "@" Name
-    ("extends" super:(Name || ",")+)?
-    ("--" uc:(Name || ",")+)?
+    ("extends" sup:(Name@UCDActor || ",")+)?
+    ("--" uc:(Name@UCDUseCase || ",")+)?
     ";";
 }
