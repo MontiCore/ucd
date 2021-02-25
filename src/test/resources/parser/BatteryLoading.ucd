@@ -1,38 +1,28 @@
 package parser;
 
 usecasediagram BatteryLoading {
-  actor Driver;
-  actor Car;
-  actor LoadingStation;
+  @Driver --
+    Pay,
+    RequestLoading;
 
-  usecase Pay;
-  association Driver -- Pay;
-  association LoadingStation -- Pay;
+  @Car --
+    CheckLoadingCable,
+    CalculateLoadingAmount,
+    Loading,
+    FastLoading;
 
-  usecase App extends Pay;
+  @LoadingStation --
+    Pay,
+    CheckLoadingCable,
+    CalculateLoadingAmount,
+    RequestLoading,
+    Loading,
+    FastLoading;
 
-  usecase CreditCard extends Pay;
+  FastLoading [isFastLoadingStation] --> Loading [isFastLoadingStation];
+  App extends Pay;
+  CreditCard extends Pay;
 
-  usecase CheckLoadingCable;
-  association Car -- CheckLoadingCable;
-  association LoadingStation -- CheckLoadingCable;
-
-  usecase CalculateLoadingAmount;
-  association Car -- CalculateLoadingAmount;
-  association LoadingStation -- CalculateLoadingAmount;
-  include CalculateLoadingAmount -> CheckLoadingCable;
-
-  usecase RequestLoading;
-  association Driver -- RequestLoading;
-  association LoadingStation -- RequestLoading;
-  include RequestLoading -> CalculateLoadingAmount;
-
-  usecase Loading;
-  association Car -- Loading;
-  association LoadingStation -- Loading;
-
-  usecase FastLoading [isFastLoadingStation];
-  association Car -- FastLoading;
-  association LoadingStation -- FastLoading;
-  extend FastLoading -> Loading [isFastLoadingStation];
+  RequestLoading --> CalculateLoadingAmount;
+  CalculateLoadingAmount --> CheckLoadingCable;
 }

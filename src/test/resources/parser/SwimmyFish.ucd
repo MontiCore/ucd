@@ -1,31 +1,15 @@
 package parser;
 
 usecasediagram SwimmyFish {
-  actor Player;
-  actor Server;
+  @Player -- Play, ChangeProfilePic, Pay;
+  @Server -- ShowAd, RegisterScore;
 
-  usecase Play;
-  association Player -- Play;
+  CreditCard extends Pay;
+  Bank extends Pay;
+  ChangeProfilePic [premiumPlayer];
+  CheckPremium;
 
-  usecase ShowAd;
-  association Server -- ShowAd;
-  extend ShowAd -> Play [!premiumPlayer];
-
-  usecase CreditCard extends Pay;
-
-  usecase Bank extends Pay;
-
-  usecase ChangeProfilePic [premiumPlayer];
-  association Player -- ChangeProfilePic;
-
-  usecase CheckPremium;
-
-  usecase RegisterScore;
-  association Server -- RegisterScore;
-  extend RegisterScore -> Play [gameFinished];
-
-  usecase Pay;
-  association Player -- Pay;
-  include Pay -> CheckPremium;
-
+  Pay --> CheckPremium;
+  ShowAd --> Play [!premiumPlayer];
+  RegisterScore --> Play [gameFinished];
 }
