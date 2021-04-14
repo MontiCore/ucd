@@ -56,13 +56,15 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    *            interpreted to be of type boolean and are implicitly
    *            introduced by their usage.
    * @attribute sup Names of use cases extended by the use case.
-   * @attribute UCDConstrainedUC List of use cases to which there exists an
-   *            extend or an include.
+   * @attribute UCDExtend List of use cases to which there exists an
+   *            extend. Extend may be guarded.
+   * @attribute incl List of use cases included by the use case.
    */
   symbol UCDUseCase implements UCDElement =
-    Name ("[" Expression "]")?
-    ("extends" sup:(Name@UCDUseCase || ",")+)?
-    ("-->" UCDConstrainedUC+ )?
+    ["abstract"]? Name ("[" Expression "]")?
+    ("specializes" sup:(Name@UCDUseCase || ",")+)?
+    ("extend" (UCDExtend || ",")+ )?
+    ("include" incl:(Name@UCDUseCase || ",")+ )?
     ";";
 
   /**
@@ -75,7 +77,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    *            Variables used in the expression are interpreted to be of
    *            type boolean and are implicitly introduced by their usage.
    */
-  UCDConstrainedUC =
+  UCDExtend =
     Name@UCDUseCase ("[" Expression "]")?;
 
   /**
@@ -88,8 +90,8 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    *            defined via the usage of UCDUseCase).
    */
   symbol UCDActor implements UCDElement =
-    "@" Name
-    ("extends" sup:(Name@UCDActor || ",")+)?
+    ["abstract"]? "@" Name
+    ("specializes" sup:(Name@UCDActor || ",")+)?
     ("--" uc:(Name@UCDUseCase || ",")+)?
     ";";
 }

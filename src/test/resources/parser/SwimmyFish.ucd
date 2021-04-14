@@ -4,12 +4,12 @@ usecasediagram SwimmyFish {
   @Player -- Play, ChangeProfilePic, Pay;
   @Server -- ShowAd, RegisterScore;
 
-  CreditCard extends Pay;
-  Bank extends Pay;
+  CreditCard specializes Pay;
+  Bank specializes Pay;
   ChangeProfilePic [premiumPlayer];
   CheckPremium;
 
-  Pay --> CheckPremium;
-  ShowAd --> Play [!premiumPlayer];
-  RegisterScore --> Play [gameFinished];
+  Pay include CheckPremium;
+  ShowAd extend Play [!premiumPlayer];
+  RegisterScore extend Play [gameFinished];
 }

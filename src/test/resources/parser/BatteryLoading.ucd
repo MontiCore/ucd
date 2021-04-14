@@ -19,10 +19,10 @@ usecasediagram BatteryLoading {
     Loading,
     FastLoading;
 
-  FastLoading [isFastLoadingStation] --> Loading [isFastLoadingStation];
-  App extends Pay;
-  CreditCard extends Pay;
+  FastLoading [isFastLoadingStation] extend Loading [isFastLoadingStation];
+  App specializes Pay;
+  CreditCard specializes Pay;
 
-  RequestLoading --> CalculateLoadingAmount;
-  CalculateLoadingAmount --> CheckLoadingCable;
+  RequestLoading include CalculateLoadingAmount;
+  CalculateLoadingAmount include CheckLoadingCable;
 }
