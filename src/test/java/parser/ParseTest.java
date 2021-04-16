@@ -58,4 +58,19 @@ public class ParseTest {
     assertTrue(ucd.isPresent());
   }
 
+  @Test
+  public void parseCarCharging1() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/CarCharging1.ucd");
+    assertTrue(ucd.isPresent());
+  }
+
+  @Test
+  public void parseCarCharging2() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/CarCharging2.ucd");
+    assertTrue(ucd.isPresent());
+  }
+
+
 }

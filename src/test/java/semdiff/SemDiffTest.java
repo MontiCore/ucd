@@ -169,4 +169,22 @@ public class SemDiffTest {
     assertTrue(diff.isEmpty());
   }
 
+  @Test
+  public void fromCarCharging1ToCarCharging2() throws IOException {
+    ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/CarCharging1.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/CarCharging2.ucd").get();
+
+    Set<Scenario> diff = SemUCDDiff.diff(ast1, ast2);
+    assertEquals(3, diff.size());
+  }
+
+  @Test
+  public void fromCarCharging2ToCarCharging1() throws IOException {
+    ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/CarCharging1.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/CarCharging2.ucd").get();
+
+    Set<Scenario> diff = SemUCDDiff.diff(ast2, ast1);
+    assertEquals(4, diff.size());
+  }
+
 }

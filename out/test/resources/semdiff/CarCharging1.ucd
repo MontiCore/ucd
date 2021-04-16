@@ -1,0 +1,23 @@
+package parser;
+
+usecasediagram CarCharging1 {
+  @Driver --
+    Pay,
+    RequestCharging;
+
+  @Car --
+    CalculateChargingQuantity,
+    CheckCable,
+    Charge,
+    ChargeFast;
+
+  @ChargingStation --
+    Pay,
+    RequestCharging,
+    CalculateChargingQuantity,
+    CheckCable,
+    Charge;
+
+  @FastChargingStation specializes ChargingStation --
+    ChargeFast;
+}
