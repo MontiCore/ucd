@@ -58,11 +58,11 @@ public class Scenario {
   public String toString() {
     StringBuilder s = new StringBuilder();
     s.append("scenario {");
-    s.append("  Statisfied variables: " + val + System.lineSeparator());
-    s.append("  Use cases: " + ucs + System.lineSeparator());
+    s.append("  Statisfied variables: ").append(val).append(System.lineSeparator());
+    s.append("  Use cases: ").append(ucs).append(System.lineSeparator());
     for (String actor : actor2uc.keySet()) {
-      s.append("  @" + actor + "--");
-      s.append(actor2uc.get(actor) + System.lineSeparator());
+      s.append("  @").append(actor).append("--");
+      s.append(actor2uc.get(actor)).append(System.lineSeparator());
     }
     s.append("}");
     return s.toString();

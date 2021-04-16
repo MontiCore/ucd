@@ -10,12 +10,12 @@ import ucd.semdiff.SemUCDDiff;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("all")
 public class SemDiffTest {
 
   private final UCDParser parser = UCDMill.parser();
@@ -169,7 +169,7 @@ public class SemDiffTest {
     ASTUCDArtifact swimmyFish2 = parser.parse("src/test/resources/semdiff/SwimmyFish2.ucd").get();
 
     Set<Scenario> diff = SemUCDDiff.diff(swimmyFish1, swimmyFish2);
-    System.err.println(diff);
+    assertEquals(16, diff.size());
   }
 
   @Test

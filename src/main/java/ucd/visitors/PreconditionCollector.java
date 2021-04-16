@@ -16,9 +16,9 @@ import java.util.Set;
 
 public class PreconditionCollector implements UCDVisitor2 {
 
-  private Map<String, ASTExpression> uc2Precondition;
-  private ASTExpression trueExpression;
-  Set<String> allUCNames;
+  private final Map<String, ASTExpression> uc2Precondition;
+  private final ASTExpression trueExpression;
+  private final Set<String> allUCNames;
 
   public PreconditionCollector(Set<String> allUCNames) {
     this.allUCNames = allUCNames;

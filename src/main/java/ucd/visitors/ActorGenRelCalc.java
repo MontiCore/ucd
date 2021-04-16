@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class ActorGenRelCalc implements UCDVisitor2 {
 
-  private Set<UCDEdge> actorGeneralizationRelation = new HashSet<>();
+  private final Set<UCDEdge> actorGeneralizationRelation = new HashSet<>();
   Set<String> allActorNames = new HashSet<>();
 
   public ActorGenRelCalc(Set<String> allActorNames) {

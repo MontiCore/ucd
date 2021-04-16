@@ -1,18 +1,16 @@
 package ucd.visitors;
 
 import com.google.common.collect.HashMultimap;
-import org.antlr.v4.runtime.misc.MultiMap;
 import ucd._ast.ASTUCDActor;
 import ucd._ast.ASTUseCaseDiagram;
 import ucd._ast.UCDEdge;
 import ucd._visitor.UCDVisitor2;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class AssociationCollector implements UCDVisitor2 {
 
-  private Set<UCDEdge> ucGeneralizationRelation;
+  private final Set<UCDEdge> ucGeneralizationRelation;
   HashMultimap<String, String> associations;
 
   public AssociationCollector(Set<UCDEdge> ucGeneralizationRelation) {

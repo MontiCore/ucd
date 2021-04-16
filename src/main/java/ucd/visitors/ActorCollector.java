@@ -8,8 +8,8 @@ import java.util.Set;
 
 public class ActorCollector implements UCDVisitor2 {
 
-  private Set<String> actors;
-  private Set<String> abstractActors;
+  private final Set<String> actors;
+  private final Set<String> abstractActors;
 
   public ActorCollector() {
     this.actors = new HashSet<>();

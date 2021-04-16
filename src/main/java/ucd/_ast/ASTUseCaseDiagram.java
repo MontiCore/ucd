@@ -1,7 +1,6 @@
 package ucd._ast;
 
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import ucd._visitor.UCDTraverser;
 import ucd._visitor.UCDTraverserImplementation;
@@ -22,7 +21,6 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
   private Set<UCDEdge> ucGeneralizationRelation;
   private Set<String> allUCNames;
   private Set<String> nonAbstractUCNames;
-  private Set<String> allActorNames;
   private Set<String> nonAbstractActorNames;
   private Set<UCDEdge> actorGeneralizationRelation;
   private Set<String> allVariables;
@@ -42,7 +40,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
       ActorCollector actorCollector = new ActorCollector();
       preTrav.add4UCD(actorCollector);
       this.accept(preTrav);
-      this.allActorNames = new HashSet<>(actorCollector.getActors());
+      Set<String> allActorNames = new HashSet<>(actorCollector.getActors());
       this.ucGeneralizationRelation = new HashSet<>(ucGenRelCalc.getUCGeneralizationRelation());
 
       UCDTraverser t = new UCDTraverserImplementation();
@@ -53,7 +51,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
       ExtendCollector extendCollector = new ExtendCollector();
       t.add4UCD(extendCollector);
 
-      ActorGenRelCalc actorGenRelCalc = new ActorGenRelCalc(this.allActorNames);
+      ActorGenRelCalc actorGenRelCalc = new ActorGenRelCalc(allActorNames);
       t.add4UCD(actorGenRelCalc);
 
       AssociationCollector associationCollector = new AssociationCollector(this.ucGeneralizationRelation);
@@ -106,24 +104,6 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
   public Set<UCDEdge> getUnguardedExtendRelation() {
     init();
     return new HashSet<>(this.unguardedExtendRelation);
-  }
-
-  /**
-   * Returns all actors directly or indirectly (via generalization)
-   * associated with the use cases contained in useCases.
-   *
-   * @param useCases set of use cases
-   * @return actors
-   */
-  public Set<String> getActors(Set<String> useCases) {
-    init();
-    Set<String> res = new HashSet<>();
-    for (Map.Entry<String, String> entry : associations.entries()) {
-      if (useCases.contains(entry.getValue())) {
-        res.add(entry.getKey());
-      }
-    }
-    return res;
   }
 
   /**

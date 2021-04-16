@@ -1,6 +1,5 @@
 package ucd.visitors;
 
-import ucd._ast.ASTUCDArtifact;
 import ucd._ast.ASTUCDUseCase;
 import ucd._ast.ASTUseCaseDiagram;
 import ucd._ast.UCDEdge;
@@ -11,8 +10,8 @@ import java.util.Set;
 
 public class UCGenRelCalc implements UCDVisitor2 {
 
-  private Set<UCDEdge> ucGeneralizationRelation = new HashSet<>();
-  Set<String> allUCNames = new HashSet<>();
+  private final Set<UCDEdge> ucGeneralizationRelation = new HashSet<>();
+  private final Set<String> allUCNames = new HashSet<>();
 
   public UCGenRelCalc(Set<String> allUCNames) {
     this.allUCNames.addAll(allUCNames);

@@ -17,9 +17,9 @@ import java.util.Set;
 
 public class ExtendCollector implements UCDVisitor2 {
 
-  private Map<UCDEdge, ASTExpression> guardedExtendRelation;
-  private Set<UCDEdge> unguardedExtendRelation;
-  private ASTExpression trueExpression;
+  private final Map<UCDEdge, ASTExpression> guardedExtendRelation;
+  private final Set<UCDEdge> unguardedExtendRelation;
+  private final ASTExpression trueExpression;
 
   public ExtendCollector() {
     this.guardedExtendRelation = new HashMap<>();
@@ -41,7 +41,7 @@ public class ExtendCollector implements UCDVisitor2 {
         unguardedExtendRelation.add(extendEdge);
       }
     }
-    for(String include : node.getInclList()) {
+    for (String include : node.getInclList()) {
       UCDEdge extendEdge = new UCDEdge(include, name);
       guardedExtendRelation.put(extendEdge, trueExpression);
     }
