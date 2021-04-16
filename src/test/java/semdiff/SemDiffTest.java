@@ -143,18 +143,6 @@ public class SemDiffTest {
   }
 
   @Test
-  public void scenariosSwimmyFish1() throws IOException {
-    ASTUCDArtifact swimmyFish1 = parser.parse("src/test/resources/semdiff/SwimmyFish1.ucd").get();
-    ASTUseCaseDiagram ucd = swimmyFish1.getUseCaseDiagram();
-
-    Set<Scenario> scenarios = SemUCDDiff.scn(ucd, "Play", new HashSet<>());
-    scenarios = SemUCDDiff.scn(ucd, "Bank", new HashSet<>());
-    scenarios = SemUCDDiff.scn(ucd, "RegisterScore", new HashSet<>());
-    System.out.println("asd");
-
-  }
-
-  @Test
   public void fromSwimmyFish1ToSwimmyFish1() throws IOException {
     ASTUCDArtifact swimmyFish1 = parser.parse("src/test/resources/semdiff/SwimmyFish1.ucd").get();
     ASTUCDArtifact swimmyFish11 = parser.parse("src/test/resources/semdiff/SwimmyFish1.ucd").get();
