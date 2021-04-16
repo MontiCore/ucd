@@ -30,25 +30,24 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
 
   public void init() {
     if (!this.isInitialized) {
-      UCDTraverser preTrav = new UCDTraverserImplementation();
-
+      UCDTraverser preTravUCNames = new UCDTraverserImplementation();
       UCCollector ucNameCalc = new UCCollector();
-      preTrav.add4UCD(ucNameCalc);
+      preTravUCNames.add4UCD(ucNameCalc);
+      this.accept(preTravUCNames);
+      this.allUCNames = new HashSet<>(ucNameCalc.getUCNames());
 
+      UCDTraverser preTrav = new UCDTraverserImplementation();
       UCGenRelCalc ucGenRelCalc = new UCGenRelCalc(this.allUCNames);
       preTrav.add4UCD(ucGenRelCalc);
-
       ActorCollector actorCollector = new ActorCollector();
       preTrav.add4UCD(actorCollector);
-
       this.accept(preTrav);
-      this.allUCNames = new HashSet<>(ucNameCalc.getUCNames());
       this.allActorNames = new HashSet<>(actorCollector.getActors());
       this.ucGeneralizationRelation = new HashSet<>(ucGenRelCalc.getUCGeneralizationRelation());
 
       UCDTraverser t = new UCDTraverserImplementation();
 
-      PreconditionCollector preconditionCollector = new PreconditionCollector();
+      PreconditionCollector preconditionCollector = new PreconditionCollector(allUCNames);
       t.add4UCD(preconditionCollector);
 
       ExtendCollector extendCollector = new ExtendCollector();
@@ -58,8 +57,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
       t.add4UCD(actorGenRelCalc);
 
       AssociationCollector associationCollector = new AssociationCollector(this.ucGeneralizationRelation);
-      this.associations = associationCollector.getAssociations();
-
+      t.add4UCD(associationCollector);
       this.accept(t);
 
       this.uc2Precondition = new HashMap<>(preconditionCollector.getUc2Precondition());
@@ -73,6 +71,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
       this.allVariables = new HashSet<>();
       this.uc2Precondition.values().forEach(x -> allVariables.addAll(Formulas.allUsedVariables(x)));
       this.guardedExtendRelation.values().forEach(x -> allVariables.addAll(Formulas.allUsedVariables(x)));
+      this.associations = associationCollector.getAssociations();
 
       this.isInitialized = true;
     }
@@ -140,15 +139,18 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
     init();
     HashMultimap<String, String> res = HashMultimap.create();
     for (String uc : useCases) {
-      for (String actor : res.keySet()) {
+      for (String actor : associations.keySet()) {
         Set<String> valuesForActor = associations.get(actor);
         if (valuesForActor.contains(uc)) {
           res.put(actor, uc);
         }
       }
     }
-
     return res;
+  }
+
+  public HashMultimap<String, String> getAssociations() {
+    return this.associations;
   }
 
   public Set<UCDEdge> getActorGeneralizationRelation() {

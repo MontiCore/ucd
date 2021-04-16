@@ -1,0 +1,25 @@
+/**
+*  This diagram contains a navigationspecific view on the Use Cases from the publication N. Jäckel, C. Granrath, R. Schaller, M.
+*  Grothenrath, M. Fischer, P. Orth und J. Andert, of VTOL air-taxis into an existing infrastructure with the use of the Model-Based
+*  Vertical Flight Society 76th Annual Forum, virtual, 2020.
+*/ 
+
+package semdiff;
+
+usecasediagram FeatureNavigation {
+  @Owner -- MaximizeProfit;
+  @OtherVTOL -- AvoidCrashes;
+  @OtherAerealObject -- AvoidCrashes;
+  @AirTrafficManagement -- RemoteControlVTOL;
+  @Pilot -- RemoteControlVTOL, UseVTOLAutonomously, ControlVTOLManually;   
+
+  MinimizeCosts;
+  AvoidCrashes; 
+  RemoteControlVTOL;
+  PrecieveObjects; 
+  MaximizeProfit include MinimizeCosts;
+  UseVTOLAutonomously include StartAutonomousMode; 
+  StartAutonomousMode extend ControlVTOLManually; 
+  ControlVTOLManually include PilotVTOLEasily;
+  PilotVTOLEasily include PrecieveObjects; 
+}

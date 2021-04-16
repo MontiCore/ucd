@@ -47,9 +47,24 @@ public class Scenario {
 
   /**
    * Returns set containing all linked actors.
+   *
    * @return set of actors
    */
   public Set<String> getLinkedActors() {
     return new HashSet<>();
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder s = new StringBuilder();
+    s.append("scenario {");
+    s.append("  Statisfied variables: " + val + System.lineSeparator());
+    s.append("  Use cases: " + ucs + System.lineSeparator());
+    for (String actor : actor2uc.keySet()) {
+      s.append("  @" + actor + "--");
+      s.append(actor2uc.get(actor) + System.lineSeparator());
+    }
+    s.append("}");
+    return s.toString();
   }
 }

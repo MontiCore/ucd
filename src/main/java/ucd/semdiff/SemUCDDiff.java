@@ -1,12 +1,18 @@
 package ucd.semdiff;
 
 import com.google.common.collect.HashMultimap;
+import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
+import ucd._ast.ASTUCDArtifact;
 import ucd._ast.ASTUseCaseDiagram;
 import ucd._ast.UCDEdge;
 
 import java.util.*;
 
 public class SemUCDDiff {
+
+  public static Set<Scenario> diff(ASTUCDArtifact art1, ASTUCDArtifact art2) {
+    return diff(art1.getUseCaseDiagram(), art2.getUseCaseDiagram());
+  }
 
   public static Set<Scenario> diff(ASTUseCaseDiagram ast1, ASTUseCaseDiagram ast2) {
     Set<String> vars = ast1.getVariables();
@@ -21,7 +27,8 @@ public class SemUCDDiff {
   public static Set<String> exec(ASTUseCaseDiagram d, String u, Set<String> val) {
     Set<String> exec = new HashSet<>();
 
-    if (Formulas.evaluate(d.getPrecondition(u), val)) {
+    ASTExpression precon = d.getPrecondition(u);
+    if (Formulas.evaluate(precon, val)) {
       exec.add(u);
     }
     Deque<String> toProcess = new ArrayDeque<>();
@@ -42,7 +49,10 @@ public class SemUCDDiff {
 
   public static Set<Set<String>> closure(ASTUseCaseDiagram d, String u, Set<String> val) {
     Set<Set<String>> cls = new HashSet<>();
-    cls.add(exec(d, u, val));
+    Set<String> exec = exec(d, u, val);
+    if (!exec.isEmpty()) {
+      cls.add(exec(d, u, val));
+    }
     Deque<Set<String>> toProcess = new ArrayDeque<>();
     cls.forEach(toProcess::push);
     Set<Set<String>> processed = new HashSet<>();
@@ -64,13 +74,15 @@ public class SemUCDDiff {
           }
         }
         for (UCDEdge e : d.getUnguardedExtendRelation()) {
-          if (Formulas.evaluate(d.getPrecondition(e.getFrom()), val)) {
-            Set<String> newSet = new HashSet<>();
-            newSet.addAll(c);
-            newSet.addAll(exec(d, e.getFrom(), val));
-            if (!processed.contains(newSet)) {
-              cls.add(newSet);
-              toProcess.push(newSet);
+          if (e.getTo().equals(w)) {
+            if (Formulas.evaluate(d.getPrecondition(e.getFrom()), val)) {
+              Set<String> newSet = new HashSet<>();
+              newSet.addAll(c);
+              newSet.addAll(exec(d, e.getFrom(), val));
+              if (!processed.contains(newSet)) {
+                cls.add(newSet);
+                toProcess.push(newSet);
+              }
             }
           }
         }

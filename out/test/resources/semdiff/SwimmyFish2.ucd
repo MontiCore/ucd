@@ -1,0 +1,20 @@
+package parser;
+
+usecasediagram SwimmyFish2 {
+  @Player --
+    Play,
+    Pay,
+    ChangeProfilePicture;
+
+  @Server --
+    ShowAd,
+    RegisterScore;
+
+  ShowAd extend Play [!isPremium];
+  RegisterScore extend Play [gameFinished];
+
+  abstract Pay include CheckPremium;
+  CreditCard specializes Pay;
+  Bank specializes Pay;
+  ChangeProfilePicture [isPremium];
+}

@@ -6,21 +6,35 @@ import de.monticore.literals.mccommonliterals._ast.ASTBooleanLiteral;
 import de.monticore.literals.mccommonliterals._ast.ASTBooleanLiteralBuilder;
 import de.monticore.literals.mccommonliterals._ast.ASTConstantsMCCommonLiterals;
 import ucd._ast.ASTUCDUseCase;
+import ucd._ast.ASTUseCaseDiagram;
 import ucd._visitor.UCDVisitor2;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class PreconditionCollector implements UCDVisitor2 {
 
   private Map<String, ASTExpression> uc2Precondition;
   private ASTExpression trueExpression;
+  Set<String> allUCNames;
 
-  public PreconditionCollector() {
+  public PreconditionCollector(Set<String> allUCNames) {
+    this.allUCNames = allUCNames;
     this.uc2Precondition = new HashMap<>();
 
     ASTBooleanLiteral trueLit = new ASTBooleanLiteralBuilder().setSource(ASTConstantsMCCommonLiterals.TRUE).build();
     this.trueExpression = new ASTLiteralExpressionBuilder().setLiteral(trueLit).build();
+  }
+
+  @Override
+  public void endVisit(ASTUseCaseDiagram ast) {
+    Set<String> nonMappedNames = new HashSet<>(allUCNames);
+    nonMappedNames.removeAll(uc2Precondition.keySet());
+    for (String uc : nonMappedNames) {
+      uc2Precondition.put(uc, this.trueExpression);
+    }
   }
 
   @Override

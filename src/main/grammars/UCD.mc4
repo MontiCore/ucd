@@ -50,6 +50,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
   /**
    * An use case.
    * Each use case introduces an UCDUseCaseSymbol.
+   * @attribute abstract True iff the actor is abstract.
    * @attribute Name The name of the use case.
    * @attribute Expression Precondition that must be satisfied to execute
    *            the use case. Variables used in the expression are
@@ -81,7 +82,8 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
     Name@UCDUseCase ("[" Expression "]")?;
 
   /**
-   * An actor. 
+   * An actor.
+   * @attribute abstract True iff the actor is abstract.
    * @attribute Name The name of the actor.
    * @attribute sup Names of the actors extended by the actor.
    * @attribute uc Names of use cases associated to the actor. The use
