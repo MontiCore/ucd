@@ -1,0 +1,34 @@
+/**
+*  This diagram contains position broadcasting a view on the Use Cases from the publication N. Jäckel, C. Granrath, R. Schaller, M.
+*  Grothenrath, M. Fischer, P. Orth und J. Andert, of VTOL air-taxis into an existing infrastructure with the use of the Model-Based
+*  Vertical Flight Society 76th Annual Forum, virtual, 2020.
+*/ 
+
+package semdiff;
+
+usecasediagram FeatureNavigation {
+  @OtherVTOL -- AvoidCrashes, CooperateWOtherVTOLs, CommmunicateWithVTOL;
+  @Legal -- ConplianceWithLaws; 
+  @OtherAerealObject -- AvoidCrashes;
+  @AirTrafficManagement -- RemoteControlVTOL, CheckWaypoints;
+  @Pilot -- RemoteControlVTOL;   
+  @VTOLAirport -- PrepareSpaceForVTOLs; 
+  @AirTrafficManagement -- RemoteControlVTOL, GenerateFlightMap, CheckWaypoints, CommmunicateWithVTOL;
+  @EmergencyService -- KnowFlightRoute, CommmunicateWithVTOL;
+  @OperationControlCenter -- KnowFlightRoute, CommmunicateWithVTOL, CustomerRequestAndOffer;
+  // @Customer --  CustomerRequestAndOffer;   
+  @Maintenance -- CommmunicateWithVTOL;   
+
+
+  AvoidCrashes include PrecieveVTOL; 
+  PrecieveVTOL;   
+  CooperateWOtherVTOLs;
+  ConplianceWithLaws;
+  RemoteControlVTOL; 
+  PrepareSpaceForVTOLs; 
+  CheckWaypoints; 
+  GenerateFlightMap; 
+  CustomerRequestAndOffer include MonitorVTOL; 
+  KnowFlightRoute; 
+  CommmunicateWithVTOL; 
+}
