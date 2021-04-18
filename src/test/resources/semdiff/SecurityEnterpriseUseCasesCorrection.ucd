@@ -1,0 +1,21 @@
+/**
+*  This diagram contains Use Cases from the publication Sanford Friedenthal, Alan Moore, and Rick Steiner. A Practical Guide
+to SysML, Third Edition: The Systems Modeling Language. Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 3rd edition, 2014.
+*/ 
+
+package semdiff;
+
+usecasediagram SecurityEnterpriseUseCases {
+  @Occupant -- ProvideEmergencyResponse; 
+  @PhysicalEnvironment -- ProvidefireEmergencyResponse; 
+  @Intruder -- ProvideIntruderEmergencyResponse;
+  @Investigator -- ProvideInvestigativeData;   
+  @EmergencyMedicalService -- ProvideMedicalEmergencyResponse; 
+
+  ProvideEmergencyResponse; 
+  MitigateFailure extend ProvideEmergencyResponse [FailureEvent]; 
+  ProvidefireEmergencyResponse specializes ProvideEmergencyResponse; 
+  ProvideIntruderEmergencyResponse specializes ProvideEmergencyResponse; 
+  ProvideMedicalEmergencyResponse; 
+  ProvideInvestigativeData; 
+}

@@ -1,0 +1,67 @@
+/**
+*  This diagram contains the Use Cases from the publication N. Jäckel, C. Granrath, R. Schaller, M.
+*  Grothenrath, M. Fischer, P. Orth und J. Andert, of VTOL air-taxis into an existing infrastructure with the use of the Model-Based
+*  Vertical Flight Society 76th Annual Forum, virtual, 2020.
+*/ 
+
+package semdiff;
+
+usecasediagram FeatureNavigation {
+  @Pilot -- RemoteControlVTOL, UseVTOLAutonomously, ControlVTOLManually, SupportCustomer;   
+  @Passenger -- Travel, RequestVTOL, GetOffer; 
+  @Airpod -- ScreenLuggage, ProvidePad; 
+  @VTOLAirport -- PrepareSpaceForVTOLs;
+  @Facility -- Charge, CheckQuality;  
+  @Legal -- ConplianceWithLaws; 
+  @Owner -- MaximizeProfit;
+  @OperationControlCenter -- KnowFlightRoute, CommmunicateWithVTOL, CustomerRequestAndOffer, GenerateHighLoadFactor, SellTickets, SupportPassengers;
+  @EmergencyService -- KnowFlightRoute, MedicadePassengersAndCrew, QuenchFire, CommmunicateWithVTOL;
+  @Maintenance -- CommmunicateWithVTOL, MaintainVTOL;   
+  @OtherVTOL -- AvoidCrashes, CooperateWOtherVTOLs, CommmunicateWithVTOL;  
+  @OtherAerealObject -- AvoidCrashes, CommmunicateWithVTOL;
+  @AirTrafficManagement -- RemoteControlVTOL, GenerateFlightMap, CheckWaypoints, CommmunicateWithVTOL;  
+  
+  ScreenLuggage; 
+  ProvidePad include ParkVTOL, NoTakeOffAndArrivalDisturbance; 
+  ParkVTOL; 
+  PrepareSpaceForVTOLs include EnsureSafeEnvironmentIntegration;
+  Charge;  
+  CheckQuality; 
+  Travel include BoardAndDeboard;
+  BoardAndDeboard; 
+  ConplianceWithLaws include CheckQuality, ActiveSafetyCompliance;
+  ActiveSafetyCompliance;  
+  MaximizeProfit include MinimizeCosts, GenerateHighLoadFactor;
+  GenerateHighLoadFactor; 
+  MinimizeCosts;
+  CustomerRequestAndOffer include MonitorVTOL,RequestVTOL;
+  RequestVTOL;   
+  SellTickets include AcceptOffer;
+  AcceptOffer include GetOffer;
+  GetOffer;   
+  SupportPassengers extend SupportCustomer;
+  SupportCustomer;  
+  KnowFlightRoute;
+  MedicadePassengersAndCrew include HaveMedicationAvailable; 
+  HaveMedicationAvailable; 
+  QuenchFire include HaveMeansForFireProtection; 
+  HaveMeansForFireProtection; 
+  MaintainVTOL; 
+  CooperateWOtherVTOLs include ShardeUseOfInfrastructure; 
+  ShardeUseOfInfrastructure; 
+  AvoidCrashes include PrecieveVTOL, PrecieveObjects;
+  PrecieveObjects; 
+  UseVTOLAutonomously include StartAutonomousMode; 
+  StartAutonomousMode extend ControlVTOLManually; 
+  ControlVTOLManually include PilotVTOLEasily;
+  PilotVTOLEasily include PrecieveObjects; 
+  AvoidCrashes include PrecieveVTOL; 
+  PrecieveVTOL;   
+  CooperateWOtherVTOLs;
+  ConplianceWithLaws;
+  RemoteControlVTOL; 
+  PrepareSpaceForVTOLs; 
+  CheckWaypoints; 
+  GenerateFlightMap; 
+  CommmunicateWithVTOL; 
+}

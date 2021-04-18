@@ -1,0 +1,26 @@
+/**
+*  This diagram contains an extended version of a Use Case Diagram from the publication Sanford Friedenthal, Alan Moore, and Rick Steiner. A Practical Guide
+to SysML, Third Edition: The Systems Modeling Language. Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 3rd edition, 2014.
+*/ 
+
+package semdiff;
+
+usecasediagram OperatePremiumVehicle {
+  @VehicleOccupant -- EnterVehicle, ExitVehicle, ControlVehicleAccessory; 
+  @Passenger specializes VehicleOccupant -- PassengerEnterteinmentSystem; 
+  @Driver specializes VehicleOccupant -- DriveVehicle;
+  @Pedestrian -- PerformEmergencyBrake;   
+
+  EnterVehicle include OpenDoor; 
+  ExitVehicle include OpenDoor; 
+  ControlVehicleAccessory; 
+  ControleClimateControl specializes ControlVehicleAccessory; 
+  ControlEntertainmentSystem specializes ControlVehicleAccessory;
+  ControlSeatMassage specializes ControlVehicleAccessory; 
+  ControlInteriorLightSystem specializes ControlVehicleAccessory; 
+  PassengerEnterteinmentSystem extend ControlEntertainmentSystem [Passenger];   
+  
+  DriveVehicle;
+  PerformAntiLockBraking extend DriveVehicle[LossOfTraction]; 
+  PerformEmergencyBrake extend DriveVehicle[PedestrianInFront]
+}
