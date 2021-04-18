@@ -22,5 +22,5 @@ usecasediagram OperatePremiumVehicle {
   
   DriveVehicle;
   PerformAntiLockBraking extend DriveVehicle[LossOfTraction]; 
-  PerformEmergencyBrake extend DriveVehicle[PedestrianInFront]
+  PerformEmergencyBrake extend DriveVehicle[PedestrianInFront];
 }

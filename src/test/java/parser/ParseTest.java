@@ -72,5 +72,46 @@ public class ParseTest {
     assertTrue(ucd.isPresent());
   }
 
+  @Test
+  public void parseVTOL1() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/VTOL1.ucd");
+    assertTrue(ucd.isPresent());
+  }
+
+  @Test
+  public void parseVTOL2() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/VTOL2.ucd");
+    assertTrue(ucd.isPresent());
+  }
+
+  @Test
+  public void parseOperateVehicle() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/OperateVehicle.ucd");
+    assertTrue(ucd.isPresent());
+  }
+
+  @Test
+  public void parseOperatePremiumVehicle() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/OperatePremiumVehicle.ucd");
+    assertTrue(ucd.isPresent());
+  }
+
+  @Test
+  public void parseSecurityEnterpriseUseCases() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/SecurityEnterpriseUseCases.ucd");
+    assertTrue(ucd.isPresent());
+  }
+
+  @Test
+  public void parseSecurityEnterpriseUseCasesCorrection() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/SecurityEnterpriseUseCasesCorrection.ucd");
+    assertTrue(ucd.isPresent());
+  }
 
 }

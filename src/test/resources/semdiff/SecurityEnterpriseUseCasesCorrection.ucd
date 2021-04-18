@@ -5,7 +5,7 @@ to SysML, Third Edition: The Systems Modeling Language. Morgan Kaufmann Publishe
 
 package semdiff;
 
-usecasediagram SecurityEnterpriseUseCases {
+usecasediagram SecurityEnterpriseUseCasesCorrection {
   @Occupant -- ProvideEmergencyResponse; 
   @PhysicalEnvironment -- ProvidefireEmergencyResponse; 
   @Intruder -- ProvideIntruderEmergencyResponse;

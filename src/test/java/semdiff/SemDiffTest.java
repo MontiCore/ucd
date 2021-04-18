@@ -187,4 +187,55 @@ public class SemDiffTest {
     assertEquals(4, diff.size());
   }
 
+  @Test
+  public void fromVTOL2ToVTOL1() throws IOException {
+    ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL2.ucd").get();
+
+    Set<Scenario> diff = SemUCDDiff.diff(ast2, ast1);
+    assertEquals(6, diff.size());
+  }
+
+  @Test
+  public void fromVTOL1ToVTOL2() throws IOException {
+    ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL2.ucd").get();
+
+    Set<Scenario> diff = SemUCDDiff.diff(ast1, ast2);
+    System.out.println(diff);
+    System.out.println(diff.size());
+    assertEquals(5, diff.size());
+  }
+
+  @Test
+  public void fromFeatureNavigationToVTOL1() throws IOException {
+    ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/FeatureNavigation.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL1.ucd").get();
+
+    Set<Scenario> diff = SemUCDDiff.diff(ast1, ast2);
+    System.out.println(diff);
+    System.out.println(diff.size());
+    //assertEquals(36, diff.size());
+  }
+
+  @Test
+  public void fromFeatureBroadcastPositionToVTOL1() throws IOException {
+    ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/FeatureBroadcastPosition.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL1.ucd").get();
+
+    Set<Scenario> diff = SemUCDDiff.diff(ast2, ast1);
+    assertEquals(38, diff.size());
+  }
+
+  @Test
+  public void fromFeatureBroadcastPositionToFeatureNavigation() throws IOException {
+    ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/FeatureBroadcastPosition.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/FeatureNavigation.ucd").get();
+
+    Set<Scenario> diff = SemUCDDiff.diff(ast1, ast2);
+    System.out.println(diff);
+    System.out.println(diff.size());
+    assertEquals(11, diff.size());
+  }
+
 }
