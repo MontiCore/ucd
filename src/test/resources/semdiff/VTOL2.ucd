@@ -1,7 +1,7 @@
 /**
 *  This diagram is an extended version of the one publishesd in N. Jäckel, C. Granrath, R. Schaller, M.
-*  Grothenrath, M. Fischer, P. Orth und J. Andert, of VTOL air-taxis into an existing infrastructure with the use of the Model-Based
-*  Vertical Flight Society 76th Annual Forum, virtual, 2020.
+*  Grothenrath, M. Fischer, P. Orth und J. Andert, Integration of VTOL air-taxis into an existing infrastructure with the use of the Model-Based
+*  System Engineering (MBSE) concept CUBE. Vertical Flight Society 76th Annual Forum, virtual, 2020.
 */ 
 
 package semdiff;
