@@ -193,7 +193,7 @@ public class SemDiffTest {
     ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL2.ucd").get();
 
     Set<Scenario> diff = SemUCDDiff.diff(ast2, ast1);
-    assertEquals(6, diff.size());
+    assertEquals(7, diff.size());
   }
 
   @Test
@@ -224,7 +224,7 @@ public class SemDiffTest {
     ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL1.ucd").get();
 
     Set<Scenario> diff = SemUCDDiff.diff(ast2, ast1);
-    assertEquals(38, diff.size());
+    assertEquals(39, diff.size());
   }
 
   @Test
