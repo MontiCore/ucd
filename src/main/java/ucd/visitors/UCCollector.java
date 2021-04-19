@@ -30,10 +30,10 @@ public class UCCollector implements UCDVisitor2 {
   }
 
   public Set<String> getUCNames() {
-    return this.ucNames;
+    return new HashSet<>(this.ucNames);
   }
 
   public Set<String> getAbstractUCNames() {
-    return this.abstractUCNames;
+    return new HashSet<>(this.abstractUCNames);
   }
 }

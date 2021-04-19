@@ -48,11 +48,11 @@ public class ExtendCollector implements UCDVisitor2 {
   }
 
   public Map<UCDEdge, ASTExpression> getGuardedExtendRelation() {
-    return guardedExtendRelation;
+    return new HashMap<>(guardedExtendRelation);
   }
 
   public Set<UCDEdge> getUnguardedExtendRelation() {
-    return unguardedExtendRelation;
+    return new HashSet<>(unguardedExtendRelation);
   }
 
 }

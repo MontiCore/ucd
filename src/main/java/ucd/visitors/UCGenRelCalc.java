@@ -55,6 +55,6 @@ public class UCGenRelCalc implements UCDVisitor2 {
   }
 
   public Set<UCDEdge> getUCGeneralizationRelation() {
-    return this.ucGeneralizationRelation;
+    return new HashSet<>(this.ucGeneralizationRelation);
   }
 }

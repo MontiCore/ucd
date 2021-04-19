@@ -24,6 +24,8 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
   private Set<String> nonAbstractActorNames;
   private Set<UCDEdge> actorGeneralizationRelation;
   private Set<String> allVariables;
+  private Set<String> allActorNames;
+
   private HashMultimap<String, String> associations;
 
   public void init() {
@@ -40,7 +42,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
       ActorCollector actorCollector = new ActorCollector();
       preTrav.add4UCD(actorCollector);
       this.accept(preTrav);
-      Set<String> allActorNames = new HashSet<>(actorCollector.getActors());
+      this.allActorNames = new HashSet<>(actorCollector.getActors());
       this.ucGeneralizationRelation = new HashSet<>(ucGenRelCalc.getUCGeneralizationRelation());
 
       UCDTraverser t = new UCDTraverserImplementation();
@@ -98,7 +100,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
 
   public Set<UCDEdge> getUCGeneralizationRelation() {
     init();
-    return this.ucGeneralizationRelation;
+    return new HashSet<>(this.ucGeneralizationRelation);
   }
 
   public Set<UCDEdge> getUnguardedExtendRelation() {
@@ -135,7 +137,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
 
   public Set<UCDEdge> getActorGeneralizationRelation() {
     init();
-    return this.actorGeneralizationRelation;
+    return new HashSet<>(this.actorGeneralizationRelation);
   }
 
   /**
@@ -145,7 +147,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
    */
   public Set<String> getUseCases() {
     init();
-    return this.allUCNames;
+    return new HashSet<>(this.allUCNames);
   }
 
   /**
@@ -155,7 +157,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
    */
   public Set<String> getAllNonAbstractUCs() {
     init();
-    return this.nonAbstractUCNames;
+    return new HashSet<>(this.nonAbstractUCNames);
   }
 
   /**
@@ -165,7 +167,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
    */
   public Set<String> getAllNonAbstractActors() {
     init();
-    return this.nonAbstractActorNames;
+    return new HashSet<>(this.nonAbstractActorNames);
   }
 
   /**
@@ -175,6 +177,11 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
    */
   public Set<String> getVariables() {
     init();
-    return this.allVariables;
+    return new HashSet<>(this.allVariables);
+  }
+
+  public Set<String> getAllActorNames() {
+    init();
+    return new HashSet<>(this.allActorNames);
   }
 }

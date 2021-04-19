@@ -27,11 +27,11 @@ public class ActorCollector implements UCDVisitor2 {
   }
 
   public Set<String> getActors() {
-    return actors;
+    return new HashSet<>(actors);
   }
 
   public Set<String> getAbstractActors() {
-    return abstractActors;
+    return new HashSet<>(abstractActors);
   }
 
 }

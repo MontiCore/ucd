@@ -13,17 +13,17 @@ public class Scenario {
   private final Multimap<String, String> actor2uc;
 
   public Scenario(Set<String> val, Set<String> ucs, Multimap<String, String> actor2uc) {
-    this.val = val;
+    this.val = new HashSet<>(val);
     this.ucs = new HashSet<>(ucs);
     this.actor2uc = HashMultimap.create(actor2uc);
   }
 
   public Set<String> getVal() {
-    return val;
+    return new HashSet<>(val);
   }
 
   public Set<String> getUcs() {
-    return ucs;
+    return new HashSet<>(ucs);
   }
 
   public Multimap<String, String> getActor2uc() {

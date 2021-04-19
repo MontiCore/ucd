@@ -3,8 +3,8 @@ package ucd._ast;
 import java.util.Objects;
 
 public class UCDEdge {
-  String from;
-  String to;
+  private String from;
+  private String to;
 
   public UCDEdge(String from, String to) {
     this.from = from;

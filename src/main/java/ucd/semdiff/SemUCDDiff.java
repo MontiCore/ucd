@@ -15,7 +15,7 @@ public class SemUCDDiff {
   }
 
   public static Set<Scenario> diff(ASTUseCaseDiagram ast1, ASTUseCaseDiagram ast2) {
-    Set<String> vars = ast1.getVariables();
+    Set<String> vars = new HashSet<>(ast1.getVariables());
     vars.addAll(ast2.getVariables());
 
     Set<Scenario> semDiff = sem(ast1, vars);

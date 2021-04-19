@@ -55,6 +55,6 @@ public class ActorGenRelCalc implements UCDVisitor2 {
   }
 
   public Set<UCDEdge> getActorGeneralizationRelation() {
-    return this.actorGeneralizationRelation;
+    return new HashSet<>(this.actorGeneralizationRelation);
   }
 }

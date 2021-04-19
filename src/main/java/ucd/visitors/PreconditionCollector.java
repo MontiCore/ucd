@@ -49,6 +49,6 @@ public class PreconditionCollector implements UCDVisitor2 {
   }
 
   public Map<String, ASTExpression> getUc2Precondition() {
-    return uc2Precondition;
+    return new HashMap<>(uc2Precondition);
   }
 }
