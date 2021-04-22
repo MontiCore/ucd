@@ -36,6 +36,7 @@ dependencies {
   implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
   implementation group:'com.google.guava', name:'guava', version:guava_version
   implementation group:'org.antlr', name:'antlr4-runtime', version:antlr_version
+  implementation "commons-cli:commons-cli:1.4"
   testImplementation "de.monticore:monticore-generator:$mc_version"
   testImplementation group:'junit', name:'junit', version:junit_version
   testImplementation ("de.monticore:monticore-runtime:$mc_version"){ capabilities {

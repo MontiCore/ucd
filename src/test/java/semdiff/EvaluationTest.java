@@ -1,3 +1,4 @@
+/* (c) https://github.com/MontiCore/monticore */
 package semdiff;
 
 import org.junit.Test;

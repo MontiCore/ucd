@@ -1,3 +1,4 @@
+/* (c) https://github.com/MontiCore/monticore */
 package ucd.visitors;
 
 import com.google.common.collect.HashMultimap;

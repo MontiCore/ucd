@@ -27,7 +27,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    * @attribute UseCaseDiagram The use case diagram in the artifact.
    */
   UCDArtifact =
-    MCPackageDeclaration
+    MCPackageDeclaration?
     MCImportStatement*
     UseCaseDiagram;
 
