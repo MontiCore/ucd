@@ -6,8 +6,6 @@ located **[here](src/main/grammars/UCD.md)**.
 We recommend that **language engineers** read this documentation before reading the detailed
 documentation.
 
-[[TOC]]
-
 # Example Models
 
 <img width="700" src="doc/pics/Example.png" alt="The graphical syntax of an example UCD" style="float: left; margin-right: 10px;">
