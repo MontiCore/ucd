@@ -58,7 +58,7 @@ public class Scenario {
   @Override
   public String toString() {
     StringBuilder s = new StringBuilder();
-    s.append("scenario {");
+    s.append("scenario {" + System.lineSeparator());
     s.append("  Statisfied variables: ").append(val).append(System.lineSeparator());
     s.append("  Use cases: ").append(ucs).append(System.lineSeparator());
     for (String actor : actor2uc.keySet()) {

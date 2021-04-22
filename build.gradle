@@ -5,10 +5,7 @@ plugins {
     id "java"
     id "monticore"  version "$mc_version" // MontiCore Plugin
     id "maven-publish"
-//    id "com.github.johnrengelman.shadow" version "6.0.0"
-    // useful reports
-    // todo: reactivate this plugin when new version compatible to gradle 6.0.1 is available
-//    id 'cz.malohlava.visteg' version '1.0.5'
+    id "com.github.johnrengelman.shadow" version "4.0.4"
     id 'jacoco'
 }
 
@@ -63,28 +60,6 @@ sourceSets {
 }
 buildDir = file("$projectDir/target")
 
-// one task per file
-//fileTree(grammarDir).each {
-//    def g = it
-//    task  "generate${it.getName().substring(0,it.getName().lastIndexOf('.'))}" (type: MCTask) {
-//        grammar = file g
-//        outputDir = file "$buildDir/generated-sources/monticore/sourcecode"
-//        handcodedPath file("$projectDir/src/main/java")
-//        modelPath file("$grammarDir")
-//        def incCheckDir = file(grammarDir).toURI().relativize(g.toURI()).toString()
-//        incCheckDir = incCheckDir.substring(0,incCheckDir.lastIndexOf('.')).toLowerCase()
-//        def uptoDate = incCheck(outputDir.toString() +"/$incCheckDir/IncGenGradleCheck.txt")
-//        outputs.upToDateWhen { uptoDate }
-//    }
-//}
-
-//task generateAutomata (type: MCTask) {
-//  grammar = file "$grammarDir/Automata.mc4"
-//  outputDir = file "$buildDir/generated-sources/monticore/sourcecode"
-//  def uptoDate = incCheck("Automata.mc4")
-//  outputs.upToDateWhen { uptoDate }
-//}
-
 task generateUCD (type: MCTask) {
   grammar = file "$grammarDir/UCD.mc4"
   outputDir = file "$buildDir/generated-sources/monticore/sourcecode"
@@ -103,20 +78,21 @@ java {
 // generated java doc contains errors, disable for now
 javadoc.failOnError(false)
 
-//shadowJar { // all in one jar
-//    manifest {
-//        attributes "Main-Class": "automata.AutomataTool"
-//    }
-//    archiveClassifier =  "cli"
-//}
-
 // build grammar jar as well
 task grammarJar(type: Jar) {
     from ("$projectDir/$grammarDir"){ include "**/*.mc4" }
     archiveClassifier = "grammars"
 }
 
+shadowJar {
+    archiveFileName = 'UCDCLI.jar'
+    archiveClassifier = "cli"
+    manifest {
+        attributes('Main-Class': 'ucd.UCDCLI')
+    }
+}
 
+jar.dependsOn(shadowJar)
 
 // configure deployment
 publishing {
@@ -125,6 +101,7 @@ publishing {
         mavenJava(MavenPublication) {
             artifactId = "$project.name"
             from components.java
+            artifact shadowJar
             artifact grammarJar
         }
     }

@@ -69,7 +69,6 @@ public class UCDCLI {
         }
         Set<Scenario> witnesses = semDiff(inputUCDs.get(0), inputUCDs.get(1));
         if (!witnesses.isEmpty()) {
-          System.out.println("Diff witnesses:");
           for (Scenario witness : witnesses) {
             System.out.println(witness);
             System.out.println();
@@ -162,7 +161,7 @@ public class UCDCLI {
     options.addOption(Option.builder("s").longOpt("symboltable").optionalArg(true).hasArgs().desc("Stores the symbol tables of the input SDs in the specified files. " + "The n-th input " + "SD is stored in the file as specified by the n-th argument. " + "Default is 'target/symbols/{packageName}/{artifactName}.sdsym'.").build());
 
     // model paths
-    options.addOption(Option.builder("path").hasArgs().desc("Sets the artifact path for imported symbols, space separated.").build());
+//    options.addOption(Option.builder("path").hasArgs().desc("Sets the artifact path for imported symbols, space separated.").build());
 
     return options;
   }
