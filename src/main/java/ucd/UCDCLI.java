@@ -142,7 +142,7 @@ public class UCDCLI {
   private void printHelp(Options options) {
     HelpFormatter formatter = new HelpFormatter();
     formatter.setWidth(80);
-    formatter.printHelp("SD4DevelopmentCLI", options);
+    formatter.printHelp("UCDCLI", options);
   }
 
   private Options initOptions() {
@@ -152,13 +152,19 @@ public class UCDCLI {
     options.addOption(Option.builder("h").longOpt("help").desc("Prints this help informations.").build());
 
     // inputs
-    options.addOption(Option.builder("i").longOpt("input").hasArgs().desc("Processes the list of SD input artifacts. " + "Argument list is space separated. " + "CoCos are not checked automatically (see -c).").build());
+    options.addOption(Option.builder("i").longOpt("input").hasArgs().desc("Processes the list of UCD input artifacts. " +
+      "Argument list is space separated.").build());
 
     // semantic diff
-    options.addOption(Option.builder("sd").longOpt("semdiff").desc("Computes a diff witness showing the asymmetrical semantic difference " + "of two SD. Requires two " + "SDs as inputs. See se-rwth.de/topics for scientific foundation.").build());
+    options.addOption(Option.builder("sd").longOpt("semdiff").desc("Computes a diff witness showing the asymmetrical semantic difference " +
+      "of two UCDs. Requires two " +
+      "UCDs as inputs. See se-rwth.de/topics for scientific foundation.").build());
 
     // store symbols
-    options.addOption(Option.builder("s").longOpt("symboltable").optionalArg(true).hasArgs().desc("Stores the symbol tables of the input SDs in the specified files. " + "The n-th input " + "SD is stored in the file as specified by the n-th argument. " + "Default is 'target/symbols/{packageName}/{artifactName}.sdsym'.").build());
+    options.addOption(Option.builder("s").longOpt("symboltable").optionalArg(true).hasArgs()
+      .desc("Stores the symbol tables of the input UCDs in the specified files. " + "The n-th input " +
+        "UCD is stored in the file as specified by the n-th argument. " +
+        "Default is 'target/symbols/{packageName}/{artifactName}.ucdsym'.").build());
 
     // model paths
 //    options.addOption(Option.builder("path").hasArgs().desc("Sets the artifact path for imported symbols, space separated.").build());

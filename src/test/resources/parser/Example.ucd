@@ -1,0 +1,24 @@
+/* (c) https://github.com/MontiCore/monticore */
+package parser;
+
+usecasediagram Example {
+  @Player --
+    Play,
+    Pay,
+    ChangeProfilePicture;
+
+  @AndroidPlayer specializes Player;
+  @IOSPlayer specializes Player;
+
+  @Server --
+    ShowAd,
+    RegisterScore;
+
+  ShowAd extend Play [!isPremium];
+  RegisterScore extend Play;
+
+  abstract Pay include CheckPremium;
+  CreditCard specializes Pay;
+  Bank specializes Pay;
+  ChangeProfilePicture [isPremium];
+}

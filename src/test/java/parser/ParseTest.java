@@ -46,6 +46,13 @@ public class ParseTest {
   }
 
   @Test
+  public void parseExample() throws IOException {
+    Log.enableFailQuick(false);
+    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/parser/Example.ucd");
+    assertTrue(ucd.isPresent());
+  }
+
+  @Test
   public void parseFeatureBroadcastPosition() throws IOException {
     Log.enableFailQuick(false);
     Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/FeatureBroadcastPosition.ucd");
@@ -105,13 +112,6 @@ public class ParseTest {
   public void parseSecurityEnterpriseUseCases() throws IOException {
     Log.enableFailQuick(false);
     Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/SecurityEnterprise.ucd");
-    assertTrue(ucd.isPresent());
-  }
-
-  @Test
-  public void parseSecurityEnterpriseUseCasesCorrection() throws IOException {
-    Log.enableFailQuick(false);
-    Optional<ASTUCDArtifact> ucd = parser.parse("src/test/resources/semdiff/SecurityEnterpriseCorrection.ucd");
     assertTrue(ucd.isPresent());
   }
 
