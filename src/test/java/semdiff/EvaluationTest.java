@@ -5,7 +5,10 @@ import ucd.UCDMill;
 import ucd._ast.ASTUCDArtifact;
 import ucd._ast.ASTUseCaseDiagram;
 import ucd._parser.UCDParser;
+import ucd.semdiff.Scenario;
+import ucd.semdiff.SemUCDDiff;
 
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -81,7 +84,10 @@ public class EvaluationTest {
 
   @Test
   public void computationTimes() throws IOException {
-    String sizeTable = "\\ & CC1 & CC2 & SF1 & SF2 & FBP & FN & OV & OPV & SE & SEC & VTOL1 & VTOL2 \\\\ \\cline{1-13} \\\\";
+    // one diff for initializations
+    SemUCDDiff.diff(cc1, cc1);
+
+    String sizeTable = "\\ & CC1 & CC2 & SF1 & SF2 & FBP & FN & OV & OPV & SE & SEC & VTOL1 & VTOL2 \\\\ \\cline{1-13} \\\\ \r\n";
     sizeTable += makeTimeEvalRow("CC1", cc1);
     sizeTable += makeTimeEvalRow("CC2", cc2);
     sizeTable += makeTimeEvalRow("SF1", sf1);
@@ -103,6 +109,65 @@ public class EvaluationTest {
 
     String res = name + " & ";
 
+    long timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, cc1);
+    long duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, cc2);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, sf1);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, sf2);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, fbp);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, fn);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, ov);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, opv);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, se);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, sec);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, vtol1);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " & ";
+
+    timeStart = System.currentTimeMillis();
+    SemUCDDiff.diff(ast, vtol2);
+    duration = System.currentTimeMillis() - timeStart;
+    res += duration + " \\\\ \r\n";
 
     return res;
   }
