@@ -17,7 +17,7 @@ This module contains
 
 ## An Example Model
 
-<img width="700" src="doc/pics/Example.png" alt="The graphical syntax of an example UCD" style="float: left; margin-right: 10px;">
+<img width="700" src="../../../doc/pics/Example.png" alt="The graphical syntax of an example UCD" style="float: left; margin-right: 10px;">
 <br><b>Figure 1:</b> The graphical syntax of an example UCD.
 
 &nbsp;  
