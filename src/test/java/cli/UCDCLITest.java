@@ -1,3 +1,4 @@
+/* (c) https://github.com/MontiCore/monticore */
 package cli;
 
 import de.monticore.symbols.basicsymbols._symboltable.VariableSymbol;
