@@ -1,5 +1,5 @@
 <!-- (c) https://github.com/MontiCore/monticore -->
-<!-- Beta-version: This is intended to become a MontiCore stable explanation. -->
+<!-- This is a MontiCore stable explanation. -->
 
 This documentation is intended for **language engineers** using or extending the use case diagram (UCD) language. 
 A detailed documentation for **modelers** who use the UCD language is 
@@ -17,7 +17,7 @@ This module contains
 
 ## An Example Model
 
-<img width="700" src="doc/pics/Example.png" alt="The graphical syntax of an example UCD" style="float: left; margin-right: 10px;">
+<img width="700" src="../../../doc/pics/Example.png" alt="The graphical syntax of an example UCD" style="float: left; margin-right: 10px;">
 <br><b>Figure 1:</b> The graphical syntax of an example UCD.
 
 &nbsp;  

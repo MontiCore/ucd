@@ -197,7 +197,7 @@ the following command:
 java -jar UCDCLI.jar -sd -i SwimmyFish1.ucd SwimmyFish2.ucd
 ```
 
-The CLI prints the scenarios that are possible in ```SwimmyFish1``` nad not possible in ```SwimmyFish2```.
+The CLI prints the scenarios that are possible in ```SwimmyFish1``` and not possible in ```SwimmyFish2```.
 The following shows an excerpt of the output:
 ```
 scenario {
