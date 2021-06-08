@@ -107,7 +107,7 @@ public class UCDCLI {
         if (cmd.getOptionValues("s") == null || cmd.getOptionValues("s").length == 0) {
           for (int i = 0; i < inputUCDs.size(); i++) {
             ASTUCDArtifact ucd = inputUCDs.get(i);
-            UCDDeSer deSer = new UCDDeSer();
+            UCDSymbols2Json deSer = new UCDSymbols2Json();
             String serialized = deSer.serialize((UCDArtifactScope) ucd.getEnclosingScope());
 
             String fileName = cmd.getOptionValues("i")[i];
@@ -203,7 +203,7 @@ public class UCDCLI {
    * @param filename The name of the produced symbol file.
    */
   public void storeSymbols(ASTUCDArtifact ast, String filename) {
-    UCDDeSer deSer = new UCDDeSer();
+    UCDSymbols2Json deSer = new UCDSymbols2Json();
     String serialized = deSer.serialize((UCDArtifactScope) ast.getEnclosingScope());
     FileReaderWriter.storeInFile(Paths.get(filename), serialized);
   }

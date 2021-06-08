@@ -1,6 +1,6 @@
+/* (c) https://github.com/MontiCore/monticore */
 package cli;
 
-import de.monticore.symbols.basicsymbols._symboltable.VariableSymbol;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Test;
 import ucd.UCDCLI;
