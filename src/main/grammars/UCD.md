@@ -1,7 +1,8 @@
 <!-- (c) https://github.com/MontiCore/monticore -->
 <!-- This is a MontiCore stable explanation. -->
 
-This documentation is intended for **language engineers** using or extending the use case diagram (UCD) language. 
+This documentation is intended for **language engineers** using or extending
+the use case diagram (UCD) language. 
 A detailed documentation for **modelers** who use the UCD language is 
 located **[here](../../../README.md)**. We recommend that **language engineers** 
 read this documentation for **modelers** before reading the other documentation.
