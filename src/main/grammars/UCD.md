@@ -54,7 +54,8 @@ usecasediagram Example {
 
 ## Command Line Interface (CLI) Usage
 
-The class [```UCDCLI```](../java/ucd/UCDCLI.java) provides typical functionality used when
+The class [```UCDCLI```](../java/ucd/UCDCLI.java)
+provides typical functionality used when
 processing models. To this effect, the class provides methods
 for parsing, creating symbol tables, storing symbols, and 
 loading symbols. 
