@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
 /**
  * CLI tool providing functionality for processing Sequence Diagram (SD) artifacts.
  */
-public class UCDCLI {
+public class UCDTool {
 
   /*
    * Main method of the CLI.
    */
   public static void main(String[] args) {
-    UCDCLI cli = new UCDCLI();
+    UCDTool cli = new UCDTool();
     cli.run(args);
   }
 
