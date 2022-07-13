@@ -2,7 +2,7 @@
 package ucd;
 
 import de.monticore.io.FileReaderWriter;
-import de.monticore.io.paths.ModelPath;
+import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FilenameUtils;
@@ -80,13 +80,13 @@ public class UCDTool {
       }
 
       // we need the global scope for symbols and cocos
-      ModelPath modelPath = new ModelPath(Paths.get(""));
+      MCPath modelPath = new MCPath(Paths.get(""));
       if (cmd.hasOption("path")) {
-        modelPath = new ModelPath(Arrays.stream(cmd.getOptionValues("path")).map(x -> Paths.get(x)).collect(Collectors.toList()));
+        modelPath = new MCPath(Arrays.stream(cmd.getOptionValues("path")).map(x -> Paths.get(x)).collect(Collectors.toList()));
       }
 
       IUCDGlobalScope globalScope = UCDMill.globalScope();
-      globalScope.setModelPath(modelPath);
+      globalScope.setSymbolPath(modelPath);
 
       if (cmd.hasOption("s")) {
         for (ASTUCDArtifact ucd : inputUCDs) {
