@@ -32,4 +32,4 @@ deploy:
     expire_in: 1 week
   only:
     refs:
-      - develop
+      - dev
