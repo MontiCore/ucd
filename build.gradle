@@ -88,7 +88,7 @@ shadowJar {
     archiveFileName = 'MCUCD.jar'
     archiveClassifier = "mc-tool"
     manifest {
-        attributes('Main-Class': 'ucd.UCDCLI')
+        attributes('Main-Class': 'ucd.UCDTool')
     }
 }
 
