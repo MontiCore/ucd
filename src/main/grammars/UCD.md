@@ -67,7 +67,7 @@ for building the took from the source files are described **[here](../../../READ
 
 ## Grammars
 
-This module contains the grammar [UCD.mc4](UCD). 
+This module contains the grammar [UCD.mc4](UCD.mc4). 
 
 ### UCD
 The grammar [UCD](UCD.mc4) contains the basic constituents to define textual 

@@ -70,7 +70,7 @@ public class UCDCLITest {
     Log.clearFindings();
     Log.initWARN();
 
-    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/FeatureNagivation.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/FeatureNavigation.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
