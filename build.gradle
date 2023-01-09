@@ -9,13 +9,6 @@ plugins {
     id 'jacoco'
 }
 
-
-def guava_version = '25.1-jre'
-def findbugs_version = '3.0.0'
-def antlr_version = '4.7.1'
-def junit_version = '4.13.1'
-def logback_version = '1.1.2'
-
 def grammarDir = 'src/main/grammars'
 
 group = "de.monticore.lang"
@@ -33,7 +26,7 @@ dependencies {
   implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
   implementation group:'com.google.guava', name:'guava', version:guava_version
   implementation group:'org.antlr', name:'antlr4-runtime', version:antlr_version
-  implementation "commons-cli:commons-cli:1.4"
+  implementation "commons-cli:commons-cli:$commons_cli_version"
   testImplementation "de.monticore:monticore-generator:$mc_version"
   testImplementation group:'junit', name:'junit', version:junit_version
   testImplementation ("de.monticore:monticore-runtime:$mc_version"){ capabilities {
