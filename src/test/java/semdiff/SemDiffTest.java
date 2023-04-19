@@ -1,6 +1,9 @@
 /* (c) https://github.com/MontiCore/monticore */
 package semdiff;
 
+import de.se_rwth.commons.logging.Log;
+import de.se_rwth.commons.logging.LogStub;
+import org.junit.Before;
 import org.junit.Test;
 import ucd.UCDMill;
 import ucd._ast.ASTUCDArtifact;
@@ -20,6 +23,14 @@ import static org.junit.Assert.assertTrue;
 public class SemDiffTest {
 
   private final UCDParser parser = UCDMill.parser();
+
+  @Before
+  public void setup() {
+    LogStub.init();
+    Log.enableFailQuick(false);
+    UCDMill.reset();
+    UCDMill.init();
+  }
 
   @Test
   public void initSwimmyFish2() throws IOException {
