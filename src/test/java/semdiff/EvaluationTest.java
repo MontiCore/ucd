@@ -1,6 +1,9 @@
 /* (c) https://github.com/MontiCore/monticore */
 package semdiff;
 
+import de.se_rwth.commons.logging.Log;
+import de.se_rwth.commons.logging.LogStub;
+import org.junit.Before;
 import org.junit.Test;
 import ucd.UCDMill;
 import ucd._ast.ASTUCDArtifact;
@@ -38,6 +41,15 @@ public class EvaluationTest {
 
   ASTUCDArtifact vtol1 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
   ASTUCDArtifact vtol2 = parser.parse("src/test/resources/semdiff/VTOL2.ucd").get();
+
+  @Before
+  public void setup() {
+    LogStub.init();
+    Log.enableFailQuick(false);
+    UCDMill.reset();
+    UCDMill.init();
+  }
+
 
   public EvaluationTest() throws IOException {
   }
