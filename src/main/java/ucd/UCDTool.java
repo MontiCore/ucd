@@ -2,7 +2,7 @@
 package ucd;
 
 import de.monticore.io.FileReaderWriter;
-import de.monticore.io.paths.ModelPath;
+import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FilenameUtils;
@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
 /**
  * CLI tool providing functionality for processing Sequence Diagram (SD) artifacts.
  */
-public class UCDCLI {
+public class UCDTool {
 
   /*
    * Main method of the CLI.
    */
   public static void main(String[] args) {
-    UCDCLI cli = new UCDCLI();
+    UCDTool cli = new UCDTool();
     cli.run(args);
   }
 
@@ -80,13 +80,13 @@ public class UCDCLI {
       }
 
       // we need the global scope for symbols and cocos
-      ModelPath modelPath = new ModelPath(Paths.get(""));
+      MCPath modelPath = new MCPath(Paths.get(""));
       if (cmd.hasOption("path")) {
-        modelPath = new ModelPath(Arrays.stream(cmd.getOptionValues("path")).map(x -> Paths.get(x)).collect(Collectors.toList()));
+        modelPath = new MCPath(Arrays.stream(cmd.getOptionValues("path")).map(x -> Paths.get(x)).collect(Collectors.toList()));
       }
 
       IUCDGlobalScope globalScope = UCDMill.globalScope();
-      globalScope.setModelPath(modelPath);
+      globalScope.setSymbolPath(modelPath);
 
       if (cmd.hasOption("s")) {
         for (ASTUCDArtifact ucd : inputUCDs) {

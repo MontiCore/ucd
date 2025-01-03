@@ -1,6 +1,9 @@
 /* (c) https://github.com/MontiCore/monticore */
 package semdiff;
 
+import de.se_rwth.commons.logging.Log;
+import de.se_rwth.commons.logging.LogStub;
+import org.junit.Before;
 import org.junit.Test;
 import ucd.UCDMill;
 import ucd._ast.ASTUCDArtifact;
@@ -20,6 +23,14 @@ import static org.junit.Assert.assertTrue;
 public class SemDiffTest {
 
   private final UCDParser parser = UCDMill.parser();
+
+  @Before
+  public void setup() {
+    LogStub.init();
+    Log.enableFailQuick(false);
+    UCDMill.reset();
+    UCDMill.init();
+  }
 
   @Test
   public void initSwimmyFish2() throws IOException {
@@ -191,7 +202,7 @@ public class SemDiffTest {
   @Test
   public void fromVTOL2ToVTOL1() throws IOException {
     ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
-    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL2.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VTOL2.ucd").get();
 
     Set<Scenario> diff = SemUCDDiff.diff(ast2, ast1);
     assertEquals(7, diff.size());
@@ -200,7 +211,7 @@ public class SemDiffTest {
   @Test
   public void fromVTOL1ToVTOL2() throws IOException {
     ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
-    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL2.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VTOL2.ucd").get();
 
     Set<Scenario> diff = SemUCDDiff.diff(ast1, ast2);
     System.out.println(diff);
@@ -211,7 +222,7 @@ public class SemDiffTest {
   @Test
   public void fromFeatureNavigationToVTOL1() throws IOException {
     ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/FeatureNavigation.ucd").get();
-    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL1.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
 
     Set<Scenario> diff = SemUCDDiff.diff(ast1, ast2);
     System.out.println(diff);
@@ -222,7 +233,7 @@ public class SemDiffTest {
   @Test
   public void fromFeatureBroadcastPositionToVTOL1() throws IOException {
     ASTUCDArtifact ast1 = parser.parse("src/test/resources/semdiff/FeatureBroadcastPosition.ucd").get();
-    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VtOL1.ucd").get();
+    ASTUCDArtifact ast2 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
 
     Set<Scenario> diff = SemUCDDiff.diff(ast2, ast1);
     assertEquals(39, diff.size());

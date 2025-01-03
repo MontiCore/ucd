@@ -1,7 +1,8 @@
 <!-- (c) https://github.com/MontiCore/monticore -->
 <!-- This is a MontiCore stable explanation. -->
 
-This documentation is intended for **language engineers** using or extending the use case diagram (UCD) language. 
+This documentation is intended for **language engineers** using or extending
+the use case diagram (UCD) language. 
 A detailed documentation for **modelers** who use the UCD language is 
 located **[here](../../../README.md)**. We recommend that **language engineers** 
 read this documentation for **modelers** before reading the other documentation.
@@ -17,7 +18,8 @@ This module contains
 
 ## An Example Model
 
-<img width="700" src="../../../doc/pics/Example.png" alt="The graphical syntax of an example UCD" style="float: left; margin-right: 10px;">
+<img width="700" src="../../../doc/pics/Example.png"
+  alt="The graphical syntax of an example UCD" style="float: left; margin-right: 10px;">
 <br><b>Figure 1:</b> The graphical syntax of an example UCD.
 
 &nbsp;  
@@ -52,7 +54,8 @@ usecasediagram Example {
 
 ## Command Line Interface (CLI) Usage
 
-The class [```UCDCLI```](../java/ucd/UCDCLI.java) provides typical functionality used when
+The class [```UCDCLI```](../java/ucd/UCDCLI.java)
+provides typical functionality used when
 processing models. To this effect, the class provides methods
 for parsing, creating symbol tables, storing symbols, and 
 loading symbols. 
@@ -64,7 +67,7 @@ for building the took from the source files are described **[here](../../../READ
 
 ## Grammars
 
-This module contains the grammar [UCD.mc4](UCD). 
+This module contains the grammar [UCD.mc4](UCD.mc4). 
 
 ### UCD
 The grammar [UCD](UCD.mc4) contains the basic constituents to define textual 

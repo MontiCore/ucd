@@ -2,8 +2,10 @@
 package cli;
 
 import de.se_rwth.commons.logging.Log;
+import de.se_rwth.commons.logging.LogStub;
+import org.junit.Before;
 import org.junit.Test;
-import ucd.UCDCLI;
+import ucd.UCDTool;
 import ucd._ast.ASTUCDArtifact;
 import ucd._symboltable.IUCDArtifactScope;
 import ucd._symboltable.UCDActorSymbol;
@@ -20,138 +22,100 @@ import static org.junit.Assert.assertTrue;
 
 public class UCDCLITest {
 
+  @Before
+  public void setup() {
+    LogStub.init();
+    Log.enableFailQuick(false);
+    Log.initWARN();
+  }
+
   @Test
   public void parse1() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/parser/BatteryLoading.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/parser/BatteryLoading.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse2() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/parser/SwimmyFish.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/parser/SwimmyFish.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse3() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/CarCharging1.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/CarCharging1.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse4() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/CarCharging2.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/CarCharging2.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse5() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/FeatureBroadcastPosition.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/FeatureBroadcastPosition.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse6() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/FeatureNagivation.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/FeatureNavigation.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse7() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/OperatePremiumVehicle.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/OperatePremiumVehicle.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse8() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/OperateVehicle.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/OperateVehicle.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse9() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/SecurityEnterprise.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/SecurityEnterprise.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse10() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/SecurityEnterpriseCorrection.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/SecurityEnterpriseCorrection.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse11() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/SwimmyFish1.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/SwimmyFish1.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse12() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/SwimmyFish2.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/SwimmyFish2.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse13() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/VTOL1.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/VTOL1.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void parse14() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/VTOL2.ucd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/VTOL2.ucd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void toolDeSerTest() throws IOException {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI cli = new UCDCLI();
+    UCDTool cli = new UCDTool();
     Set<String> testModels = new HashSet<>();
     testModels.add("CarCharging1");
     testModels.add("CarCharging2");
@@ -198,19 +162,13 @@ public class UCDCLITest {
 
   @Test
   public void semDiff1() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/SwimmyFish1.ucd", "src/test/resources/semdiff/SwimmyFish2.ucd", "-sd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/SwimmyFish1.ucd", "src/test/resources/semdiff/SwimmyFish2.ucd", "-sd" });
     assertEquals(0, Log.getErrorCount());
   }
 
   @Test
   public void semDiff2() {
-    Log.clearFindings();
-    Log.initWARN();
-
-    UCDCLI.main(new String[] { "-i", "src/test/resources/semdiff/SwimmyFish2.ucd", "src/test/resources/semdiff/SwimmyFish1.ucd", "-sd" });
+    UCDTool.main(new String[] { "-i", "src/test/resources/semdiff/SwimmyFish2.ucd", "src/test/resources/semdiff/SwimmyFish1.ucd", "-sd" });
     assertEquals(0, Log.getErrorCount());
   }
 
