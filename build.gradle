@@ -95,7 +95,6 @@ publishing {
         mavenJava(MavenPublication) {
             artifactId = "$project.name"
             from components.java
-            artifact shadowJar
             artifact grammarJar
         }
     }
