@@ -6,13 +6,13 @@ import ucd._ast.ASTUseCaseDiagram;
 import ucd._ast.UCDEdge;
 import ucd._visitor.UCDVisitor2;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class ActorGenRelCalc implements UCDVisitor2 {
 
-  private final Set<UCDEdge> actorGeneralizationRelation = new HashSet<>();
-  Set<String> allActorNames = new HashSet<>();
+  private final Set<UCDEdge> actorGeneralizationRelation = new LinkedHashSet<>();
+  Set<String> allActorNames = new LinkedHashSet<>();
 
   public ActorGenRelCalc(Set<String> allActorNames) {
     this.allActorNames.addAll(allActorNames);
@@ -25,9 +25,9 @@ public class ActorGenRelCalc implements UCDVisitor2 {
   }
 
   private void makeTransitive(Set<UCDEdge> ucGeneralizationRelation) {
-    Set<UCDEdge> prev = new HashSet<>();
+    Set<UCDEdge> prev = new LinkedHashSet<>();
     while (!prev.equals(ucGeneralizationRelation)) {
-      prev = new HashSet<>(ucGeneralizationRelation);
+      prev = new LinkedHashSet<>(ucGeneralizationRelation);
       for (String uc1 : allActorNames) {
         for (String uc2 : allActorNames) {
           for (String uc3 : allActorNames) {
@@ -56,6 +56,6 @@ public class ActorGenRelCalc implements UCDVisitor2 {
   }
 
   public Set<UCDEdge> getActorGeneralizationRelation() {
-    return new HashSet<>(this.actorGeneralizationRelation);
+    return new LinkedHashSet<>(this.actorGeneralizationRelation);
   }
 }

@@ -13,7 +13,7 @@ import ucd.semdiff.Scenario;
 import ucd.semdiff.SemUCDDiff;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -47,18 +47,18 @@ public class SemDiffTest {
     ASTUCDArtifact swimmyFish2 = parser.parse("src/test/resources/semdiff/SwimmyFish2.ucd").get();
     ASTUseCaseDiagram ucd = swimmyFish2.getUseCaseDiagram();
 
-    Set<String> exec = SemUCDDiff.exec(ucd, "Play", new HashSet<>());
+    Set<String> exec = SemUCDDiff.exec(ucd, "Play", new LinkedHashSet<>());
     assertEquals(2, exec.size());
     assertTrue(exec.contains("Play"));
     assertTrue(exec.contains("ShowAd"));
 
-    Set<String> satVars = new HashSet<>();
+    Set<String> satVars = new LinkedHashSet<>();
     satVars.add("isPremium");
     exec = SemUCDDiff.exec(ucd, "Play", satVars);
     assertEquals(1, exec.size());
     assertTrue(exec.contains("Play"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     satVars.add("gameFinished");
     exec = SemUCDDiff.exec(ucd, "Play", satVars);
     assertEquals(3, exec.size());
@@ -66,7 +66,7 @@ public class SemDiffTest {
     assertTrue(exec.contains("ShowAd"));
     assertTrue(exec.contains("RegisterScore"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     satVars.add("gameFinished");
     satVars.add("isPremium");
     exec = SemUCDDiff.exec(ucd, "Play", satVars);
@@ -74,42 +74,42 @@ public class SemDiffTest {
     assertTrue(exec.contains("Play"));
     assertTrue(exec.contains("RegisterScore"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     exec = SemUCDDiff.exec(ucd, "Pay", satVars);
     assertEquals(2, exec.size());
     assertTrue(exec.contains("Pay"));
     assertTrue(exec.contains("CheckPremium"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     exec = SemUCDDiff.exec(ucd, "CreditCard", satVars);
     assertEquals(1, exec.size());
     assertTrue(exec.contains("CreditCard"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     exec = SemUCDDiff.exec(ucd, "Bank", satVars);
     assertEquals(1, exec.size());
     assertTrue(exec.contains("Bank"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     exec = SemUCDDiff.exec(ucd, "CheckPremium", satVars);
     assertEquals(1, exec.size());
     assertTrue(exec.contains("CheckPremium"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     exec = SemUCDDiff.exec(ucd, "RegisterScore", satVars);
     assertEquals(1, exec.size());
     assertTrue(exec.contains("RegisterScore"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     exec = SemUCDDiff.exec(ucd, "ShowAd", satVars);
     assertEquals(1, exec.size());
     assertTrue(exec.contains("ShowAd"));
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     exec = SemUCDDiff.exec(ucd, "ChangeProfilePicture", satVars);
     assertEquals(0, exec.size());
 
-    satVars = new HashSet<>();
+    satVars = new LinkedHashSet<>();
     satVars.add("isPremium");
     exec = SemUCDDiff.exec(ucd, "ChangeProfilePicture", satVars);
     assertEquals(1, exec.size());
@@ -121,10 +121,10 @@ public class SemDiffTest {
     ASTUCDArtifact swimmyFish2 = parser.parse("src/test/resources/semdiff/SwimmyFish2.ucd").get();
     ASTUseCaseDiagram ucd = swimmyFish2.getUseCaseDiagram();
 
-    Set<Set<String>> closure = SemUCDDiff.closure(ucd, "Pay", new HashSet<>());
+    Set<Set<String>> closure = SemUCDDiff.closure(ucd, "Pay", new LinkedHashSet<>());
     assertEquals(3, closure.size());
 
-    closure = SemUCDDiff.closure(ucd, "ChangeProfilePicture", new HashSet<>());
+    closure = SemUCDDiff.closure(ucd, "ChangeProfilePicture", new LinkedHashSet<>());
     assertEquals(0, closure.size());
   }
 
@@ -133,13 +133,13 @@ public class SemDiffTest {
     ASTUCDArtifact swimmyFish2 = parser.parse("src/test/resources/semdiff/SwimmyFish2.ucd").get();
     ASTUseCaseDiagram ucd = swimmyFish2.getUseCaseDiagram();
 
-    Set<Scenario> scenarios = SemUCDDiff.scn(ucd, "Pay", new HashSet<>());
+    Set<Scenario> scenarios = SemUCDDiff.scn(ucd, "Pay", new LinkedHashSet<>());
     assertEquals(3, scenarios.size());
 
-    scenarios = SemUCDDiff.scn(ucd, "ChangeProfilePicture", new HashSet<>());
+    scenarios = SemUCDDiff.scn(ucd, "ChangeProfilePicture", new LinkedHashSet<>());
     assertEquals(0, scenarios.size());
 
-    Set<String> satVars = new HashSet<>();
+    Set<String> satVars = new LinkedHashSet<>();
     satVars.add("isPremium");
     scenarios = SemUCDDiff.scn(ucd, "ChangeProfilePicture", satVars);
     assertEquals(1, scenarios.size());
@@ -150,7 +150,7 @@ public class SemDiffTest {
     ASTUCDArtifact swimmyFish1 = parser.parse("src/test/resources/semdiff/SwimmyFish1.ucd").get();
     ASTUseCaseDiagram ucd = swimmyFish1.getUseCaseDiagram();
 
-    Set<Set<String>> closure = SemUCDDiff.closure(ucd, "Bank", new HashSet<>());
+    Set<Set<String>> closure = SemUCDDiff.closure(ucd, "Bank", new LinkedHashSet<>());
     assertEquals(1, closure.size());
   }
 

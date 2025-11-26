@@ -8,8 +8,8 @@ import ucd._visitor.UCDTraverserImplementation;
 import ucd.semdiff.Formulas;
 import ucd.visitors.*;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,7 +35,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
       UCCollector ucNameCalc = new UCCollector();
       preTravUCNames.add4UCD(ucNameCalc);
       this.accept(preTravUCNames);
-      this.allUCNames = new HashSet<>(ucNameCalc.getUCNames());
+      this.allUCNames = new LinkedHashSet<>(ucNameCalc.getUCNames());
 
       UCDTraverser preTrav = new UCDTraverserImplementation();
       UCGenRelCalc ucGenRelCalc = new UCGenRelCalc(this.allUCNames);
@@ -43,8 +43,8 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
       ActorCollector actorCollector = new ActorCollector();
       preTrav.add4UCD(actorCollector);
       this.accept(preTrav);
-      this.allActorNames = new HashSet<>(actorCollector.getActors());
-      this.ucGeneralizationRelation = new HashSet<>(ucGenRelCalc.getUCGeneralizationRelation());
+      this.allActorNames = new LinkedHashSet<>(actorCollector.getActors());
+      this.ucGeneralizationRelation = new LinkedHashSet<>(ucGenRelCalc.getUCGeneralizationRelation());
 
       UCDTraverser t = new UCDTraverserImplementation();
 
@@ -61,15 +61,15 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
       t.add4UCD(associationCollector);
       this.accept(t);
 
-      this.uc2Precondition = new HashMap<>(preconditionCollector.getUc2Precondition());
-      this.guardedExtendRelation = new HashMap<>(extendCollector.getGuardedExtendRelation());
-      this.unguardedExtendRelation = new HashSet<>(extendCollector.getUnguardedExtendRelation());
-      this.nonAbstractUCNames = new HashSet<>(allUCNames);
+      this.uc2Precondition = new LinkedHashMap<>(preconditionCollector.getUc2Precondition());
+      this.guardedExtendRelation = new LinkedHashMap<>(extendCollector.getGuardedExtendRelation());
+      this.unguardedExtendRelation = new LinkedHashSet<>(extendCollector.getUnguardedExtendRelation());
+      this.nonAbstractUCNames = new LinkedHashSet<>(allUCNames);
       this.nonAbstractUCNames.removeAll(ucNameCalc.getAbstractUCNames());
-      this.nonAbstractActorNames = new HashSet<>(allActorNames);
+      this.nonAbstractActorNames = new LinkedHashSet<>(allActorNames);
       this.nonAbstractActorNames.removeAll(actorCollector.getAbstractActors());
-      this.actorGeneralizationRelation = new HashSet<>(actorGenRelCalc.getActorGeneralizationRelation());
-      this.allVariables = new HashSet<>();
+      this.actorGeneralizationRelation = new LinkedHashSet<>(actorGenRelCalc.getActorGeneralizationRelation());
+      this.allVariables = new LinkedHashSet<>();
       this.uc2Precondition.values().forEach(x -> allVariables.addAll(Formulas.allUsedVariables(x)));
       this.guardedExtendRelation.values().forEach(x -> allVariables.addAll(Formulas.allUsedVariables(x)));
       this.associations = associationCollector.getAssociations();
@@ -91,7 +91,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
 
   public Set<UCDEdge> getGuardedExtendRelation() {
     init();
-    return new HashSet<>(this.guardedExtendRelation.keySet());
+    return new LinkedHashSet<>(this.guardedExtendRelation.keySet());
   }
 
   public ASTExpression getGuard(UCDEdge e) {
@@ -101,12 +101,12 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
 
   public Set<UCDEdge> getUCGeneralizationRelation() {
     init();
-    return new HashSet<>(this.ucGeneralizationRelation);
+    return new LinkedHashSet<>(this.ucGeneralizationRelation);
   }
 
   public Set<UCDEdge> getUnguardedExtendRelation() {
     init();
-    return new HashSet<>(this.unguardedExtendRelation);
+    return new LinkedHashSet<>(this.unguardedExtendRelation);
   }
 
   /**
@@ -138,7 +138,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
 
   public Set<UCDEdge> getActorGeneralizationRelation() {
     init();
-    return new HashSet<>(this.actorGeneralizationRelation);
+    return new LinkedHashSet<>(this.actorGeneralizationRelation);
   }
 
   /**
@@ -148,7 +148,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
    */
   public Set<String> getUseCases() {
     init();
-    return new HashSet<>(this.allUCNames);
+    return new LinkedHashSet<>(this.allUCNames);
   }
 
   /**
@@ -158,7 +158,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
    */
   public Set<String> getAllNonAbstractUCs() {
     init();
-    return new HashSet<>(this.nonAbstractUCNames);
+    return new LinkedHashSet<>(this.nonAbstractUCNames);
   }
 
   /**
@@ -168,7 +168,7 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
    */
   public Set<String> getAllNonAbstractActors() {
     init();
-    return new HashSet<>(this.nonAbstractActorNames);
+    return new LinkedHashSet<>(this.nonAbstractActorNames);
   }
 
   /**
@@ -178,11 +178,11 @@ public class ASTUseCaseDiagram extends ASTUseCaseDiagramTOP {
    */
   public Set<String> getVariables() {
     init();
-    return new HashSet<>(this.allVariables);
+    return new LinkedHashSet<>(this.allVariables);
   }
 
   public Set<String> getAllActorNames() {
     init();
-    return new HashSet<>(this.allActorNames);
+    return new LinkedHashSet<>(this.allActorNames);
   }
 }

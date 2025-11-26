@@ -10,7 +10,7 @@ import de.monticore.literals.mccommonliterals._ast.ASTBooleanLiteral;
 import de.monticore.literals.mcliteralsbasis._ast.ASTLiteral;
 import de.se_rwth.commons.logging.Log;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Formulas {
@@ -18,7 +18,7 @@ public class Formulas {
   public static final String UNKNOWN_EXPRESSION_KIND = "0xC0001: Unsupported expression kind used on guard. Please use a boolean expression.";
 
   public static Set<String> allUsedVariables(ASTExpression ast) {
-    Set<String> res = new HashSet<>();
+    Set<String> res = new LinkedHashSet<>();
     if (ast instanceof ASTBooleanAndOpExpression) {
       res.addAll(allUsedVariables(((ASTBooleanAndOpExpression) ast).getLeft()));
       res.addAll(allUsedVariables(((ASTBooleanAndOpExpression) ast).getRight()));

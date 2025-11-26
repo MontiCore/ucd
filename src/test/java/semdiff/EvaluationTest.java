@@ -14,7 +14,7 @@ import ucd.semdiff.SemUCDDiff;
 
 import javax.sound.midi.SysexMessage;
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -76,10 +76,10 @@ public class EvaluationTest {
   public String makeSizeRow(String name, ASTUCDArtifact ast) {
     ASTUseCaseDiagram ucd = ast.getUseCaseDiagram();
 
-    Set<String> abstractUCs = new HashSet<>(ucd.getUseCases());
+    Set<String> abstractUCs = new LinkedHashSet<>(ucd.getUseCases());
     abstractUCs.removeAll(ucd.getAllNonAbstractUCs());
 
-    Set<String> abstractActors = new HashSet<>(ucd.getAllActorNames());
+    Set<String> abstractActors = new LinkedHashSet<>(ucd.getAllActorNames());
     abstractActors.removeAll(ucd.getAllNonAbstractActors());
 
     String res = name + " & ";

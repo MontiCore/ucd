@@ -16,7 +16,7 @@ public class SemUCDDiff {
   }
 
   public static Set<Scenario> diff(ASTUseCaseDiagram ast1, ASTUseCaseDiagram ast2) {
-    Set<String> vars = new HashSet<>(ast1.getVariables());
+    Set<String> vars = new LinkedHashSet<>(ast1.getVariables());
     vars.addAll(ast2.getVariables());
 
     Set<Scenario> semDiff = sem(ast1, vars);
@@ -26,7 +26,7 @@ public class SemUCDDiff {
   }
 
   public static Set<String> exec(ASTUseCaseDiagram d, String u, Set<String> val) {
-    Set<String> exec = new HashSet<>();
+    Set<String> exec = new LinkedHashSet<>();
 
     ASTExpression precon = d.getPrecondition(u);
     if (Formulas.evaluate(precon, val)) {
@@ -34,7 +34,7 @@ public class SemUCDDiff {
     }
     Deque<String> toProcess = new ArrayDeque<>();
     exec.forEach(toProcess::push);
-    Set<String> processed = new HashSet<>();
+    Set<String> processed = new LinkedHashSet<>();
     while (!toProcess.isEmpty()) {
       String cur = toProcess.pop();
       processed.add(cur);
@@ -49,14 +49,14 @@ public class SemUCDDiff {
   }
 
   public static Set<Set<String>> closure(ASTUseCaseDiagram d, String u, Set<String> val) {
-    Set<Set<String>> cls = new HashSet<>();
+    Set<Set<String>> cls = new LinkedHashSet<>();
     Set<String> exec = exec(d, u, val);
     if (!exec.isEmpty()) {
       cls.add(exec(d, u, val));
     }
     Deque<Set<String>> toProcess = new ArrayDeque<>();
     cls.forEach(toProcess::push);
-    Set<Set<String>> processed = new HashSet<>();
+    Set<Set<String>> processed = new LinkedHashSet<>();
     while (!toProcess.isEmpty()) {
       Set<String> c = toProcess.pop();
       processed.add(c);
@@ -64,7 +64,7 @@ public class SemUCDDiff {
         for (UCDEdge gen : d.getUCGeneralizationRelation()) {
           if (gen.getTo().equals(w)) {
             if (Formulas.evaluate(d.getPrecondition(gen.getFrom()), val)) {
-              Set<String> newSet = new HashSet<>(c);
+              Set<String> newSet = new LinkedHashSet<>(c);
               newSet.remove(gen.getTo());
               newSet.addAll(exec(d, gen.getFrom(), val));
               if (!processed.contains(newSet)) {
@@ -77,7 +77,7 @@ public class SemUCDDiff {
         for (UCDEdge e : d.getUnguardedExtendRelation()) {
           if (e.getTo().equals(w)) {
             if (Formulas.evaluate(d.getPrecondition(e.getFrom()), val)) {
-              Set<String> newSet = new HashSet<>();
+              Set<String> newSet = new LinkedHashSet<>();
               newSet.addAll(c);
               newSet.addAll(exec(d, e.getFrom(), val));
               if (!processed.contains(newSet)) {
@@ -93,12 +93,12 @@ public class SemUCDDiff {
   }
 
   public static Set<Scenario> scn(ASTUseCaseDiagram d, String u, Set<String> val) {
-    Set<Scenario> scn = new HashSet<>();
+    Set<Scenario> scn = new LinkedHashSet<>();
     for (Set<String> c : closure(d, u, val)) {
       scn.add(new Scenario(val, c, d.getAssociations(c)));
     }
     Deque<Scenario> toProcess = new ArrayDeque<>(scn);
-    Set<Scenario> processed = new HashSet<>();
+    Set<Scenario> processed = new LinkedHashSet<>();
     while (!toProcess.isEmpty()) {
       Scenario curScenario = toProcess.pop();
       processed.add(curScenario);
@@ -121,7 +121,7 @@ public class SemUCDDiff {
   }
 
   public static Set<Scenario> sem(ASTUseCaseDiagram d, Set<String> vars) {
-    Set<Scenario> res = new HashSet<>();
+    Set<Scenario> res = new LinkedHashSet<>();
     for (Set<String> val : Formulas.allValuations(vars)) {
       for (String u : d.getUseCases()) {
         for (Scenario s : scn(d, u, val)) {

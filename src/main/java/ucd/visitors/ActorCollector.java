@@ -4,7 +4,7 @@ package ucd.visitors;
 import ucd._ast.ASTUCDActor;
 import ucd._visitor.UCDVisitor2;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class ActorCollector implements UCDVisitor2 {
@@ -13,8 +13,8 @@ public class ActorCollector implements UCDVisitor2 {
   private final Set<String> abstractActors;
 
   public ActorCollector() {
-    this.actors = new HashSet<>();
-    this.abstractActors = new HashSet<>();
+    this.actors = new LinkedHashSet<>();
+    this.abstractActors = new LinkedHashSet<>();
   }
 
   @Override
@@ -28,11 +28,11 @@ public class ActorCollector implements UCDVisitor2 {
   }
 
   public Set<String> getActors() {
-    return new HashSet<>(actors);
+    return new LinkedHashSet<>(actors);
   }
 
   public Set<String> getAbstractActors() {
-    return new HashSet<>(abstractActors);
+    return new LinkedHashSet<>(abstractActors);
   }
 
 }

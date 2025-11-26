@@ -11,8 +11,8 @@ import ucd._ast.ASTUCDUseCase;
 import ucd._ast.UCDEdge;
 import ucd._visitor.UCDVisitor2;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,8 +23,8 @@ public class ExtendCollector implements UCDVisitor2 {
   private final ASTExpression trueExpression;
 
   public ExtendCollector() {
-    this.guardedExtendRelation = new HashMap<>();
-    this.unguardedExtendRelation = new HashSet<>();
+    this.guardedExtendRelation = new LinkedHashMap<>();
+    this.unguardedExtendRelation = new LinkedHashSet<>();
 
     ASTBooleanLiteral trueLit = new ASTBooleanLiteralBuilder().setSource(ASTConstantsMCCommonLiterals.TRUE).build();
     this.trueExpression = new ASTLiteralExpressionBuilder().setLiteral(trueLit).build();
@@ -49,11 +49,11 @@ public class ExtendCollector implements UCDVisitor2 {
   }
 
   public Map<UCDEdge, ASTExpression> getGuardedExtendRelation() {
-    return new HashMap<>(guardedExtendRelation);
+    return new LinkedHashMap<>(guardedExtendRelation);
   }
 
   public Set<UCDEdge> getUnguardedExtendRelation() {
-    return new HashSet<>(unguardedExtendRelation);
+    return new LinkedHashSet<>(unguardedExtendRelation);
   }
 
 }

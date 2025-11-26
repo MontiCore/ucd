@@ -6,13 +6,13 @@ import ucd._ast.ASTUseCaseDiagram;
 import ucd._ast.UCDEdge;
 import ucd._visitor.UCDVisitor2;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class UCGenRelCalc implements UCDVisitor2 {
 
-  private final Set<UCDEdge> ucGeneralizationRelation = new HashSet<>();
-  private final Set<String> allUCNames = new HashSet<>();
+  private final Set<UCDEdge> ucGeneralizationRelation = new LinkedHashSet<>();
+  private final Set<String> allUCNames = new LinkedHashSet<>();
 
   public UCGenRelCalc(Set<String> allUCNames) {
     this.allUCNames.addAll(allUCNames);
@@ -25,9 +25,9 @@ public class UCGenRelCalc implements UCDVisitor2 {
   }
 
   private void makeTransitive(Set<UCDEdge> ucGeneralizationRelation) {
-    Set<UCDEdge> prev = new HashSet<>();
+    Set<UCDEdge> prev = new LinkedHashSet<>();
     while (!prev.equals(ucGeneralizationRelation)) {
-      prev = new HashSet<>(ucGeneralizationRelation);
+      prev = new LinkedHashSet<>(ucGeneralizationRelation);
       for (String uc1 : allUCNames) {
         for (String uc2 : allUCNames) {
           for (String uc3 : allUCNames) {
@@ -56,6 +56,6 @@ public class UCGenRelCalc implements UCDVisitor2 {
   }
 
   public Set<UCDEdge> getUCGeneralizationRelation() {
-    return new HashSet<>(this.ucGeneralizationRelation);
+    return new LinkedHashSet<>(this.ucGeneralizationRelation);
   }
 }

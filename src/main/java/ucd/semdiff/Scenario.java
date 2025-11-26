@@ -4,7 +4,7 @@ package ucd.semdiff;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,17 +14,17 @@ public class Scenario {
   private final Multimap<String, String> actor2uc;
 
   public Scenario(Set<String> val, Set<String> ucs, Multimap<String, String> actor2uc) {
-    this.val = new HashSet<>(val);
-    this.ucs = new HashSet<>(ucs);
+    this.val = new LinkedHashSet<>(val);
+    this.ucs = new LinkedHashSet<>(ucs);
     this.actor2uc = HashMultimap.create(actor2uc);
   }
 
   public Set<String> getVal() {
-    return new HashSet<>(val);
+    return new LinkedHashSet<>(val);
   }
 
   public Set<String> getUcs() {
-    return new HashSet<>(ucs);
+    return new LinkedHashSet<>(ucs);
   }
 
   public Multimap<String, String> getActor2uc() {
@@ -52,7 +52,7 @@ public class Scenario {
    * @return set of actors
    */
   public Set<String> getLinkedActors() {
-    return new HashSet<>();
+    return new LinkedHashSet<>();
   }
 
   @Override

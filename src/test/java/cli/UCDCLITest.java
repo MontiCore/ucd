@@ -13,7 +13,7 @@ import ucd._symboltable.UCDArtifactScope;
 import ucd._symboltable.UCDUseCaseSymbol;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -116,7 +116,7 @@ public class UCDCLITest {
   @Test
   public void toolDeSerTest() throws IOException {
     UCDTool cli = new UCDTool();
-    Set<String> testModels = new HashSet<>();
+    Set<String> testModels = new LinkedHashSet<>();
     testModels.add("CarCharging1");
     testModels.add("CarCharging2");
     testModels.add("FeatureBroadcastPosition");
