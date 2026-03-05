@@ -3,27 +3,24 @@ plugins {
     id "java"
     id "de.monticore.generator"  version "$mc_version" // MontiCore Plugin
     id "maven-publish"
-    id "com.github.johnrengelman.shadow" version "$shadow_plugin_version"
-    id 'jacoco'
+    id "com.gradleup.shadow" version "$shadow_plugin_version"
+    id "io.github.themrmilchmann.ecj" version "0.2.0"
 }
-
-def grammarDir = 'src/main/grammars'
 
 group = "de.monticore.lang"
 version = mc_version
 description = "Use Case Diagram DSL"
-sourceCompatibility = "11"
+sourceCompatibility = JavaVersion.VERSION_21;
 
 dependencies {
   grammar ("de.monticore:monticore-grammar:$mc_version")
-  implementation group:'com.google.guava', name:'guava', version:guava_version
   implementation "commons-cli:commons-cli:$commons_cli_version"
   testImplementation "de.monticore:monticore-generator:$mc_version"
-  testImplementation group:'junit', name:'junit', version:junit_version
-  testImplementation ("de.monticore:monticore-runtime:$mc_version"){ capabilities {
-    requireCapability("de.monticore:monticore-runtime-tests")}
-  }
-  testImplementation group:'ch.qos.logback', name:'logback-classic', version:logback_version
+
+  testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+  testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_version"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+  testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junit_version"
 }
 
 // has to be placed directly under the dependency definition, since otherwise the grammar configurations are not found
@@ -39,12 +36,21 @@ repositories {
 }
 
 // configure non-standard source sets
-buildDir = file("$projectDir/target")
+layout.buildDirectory = layout.projectDirectory.dir("target")
+
+ecj {
+  compilerVersion = "3.44.0"
+}
 
 java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+
   withSourcesJar()
   withJavadocJar()
 }
+
 // generated java doc contains errors, disable for now
 javadoc.failOnError(false)
 
@@ -58,6 +64,10 @@ shadowJar {
 }
 
 jar.dependsOn(shadowJar)
+
+test {
+  useJUnitPlatform()
+}
 
 // configure deployment
 publishing {

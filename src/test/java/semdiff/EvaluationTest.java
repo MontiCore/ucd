@@ -3,46 +3,45 @@ package semdiff;
 
 import de.se_rwth.commons.logging.Log;
 import de.se_rwth.commons.logging.LogStub;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import ucd.UCDMill;
 import ucd._ast.ASTUCDArtifact;
 import ucd._ast.ASTUseCaseDiagram;
 import ucd._parser.UCDParser;
-import ucd.semdiff.Scenario;
 import ucd.semdiff.SemUCDDiff;
 
-import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("all")
 public class EvaluationTest {
 
   private final UCDParser parser = UCDMill.parser();
-  ASTUCDArtifact cc1 = parser.parse("src/test/resources/semdiff/CarCharging1.ucd").get();
-  ASTUCDArtifact cc2 = parser.parse("src/test/resources/semdiff/CarCharging2.ucd").get();
-
-  ASTUCDArtifact sf1 = parser.parse("src/test/resources/semdiff/SwimmyFish1.ucd").get();
-  ASTUCDArtifact sf2 = parser.parse("src/test/resources/semdiff/SwimmyFish2.ucd").get();
-
-  ASTUCDArtifact fbp = parser.parse("src/test/resources/semdiff/FeatureBroadcastPosition.ucd").get();
-  ASTUCDArtifact fn = parser.parse("src/test/resources/semdiff/FeatureNavigation.ucd").get();
-
-  ASTUCDArtifact ov = parser.parse("src/test/resources/semdiff/OperateVehicle.ucd").get();
-  ASTUCDArtifact opv = parser.parse("src/test/resources/semdiff/OperatePremiumVehicle.ucd").get();
-
-  ASTUCDArtifact se = parser.parse("src/test/resources/semdiff/SecurityEnterprise.ucd").get();
-  ASTUCDArtifact sec = parser.parse("src/test/resources/semdiff/SecurityEnterpriseCorrection.ucd").get();
-
-  ASTUCDArtifact vtol1 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
-  ASTUCDArtifact vtol2 = parser.parse("src/test/resources/semdiff/VTOL2.ucd").get();
-
-  @Before
+  private static ASTUCDArtifact cc1, cc2, sf1, sf2, fbp, fn, ov, opv, se, sec, vtol1, vtol2;
+  
+  @BeforeAll
+  static void beforeAll() throws IOException{
+    UCDMill.init();
+    UCDParser parser = UCDMill.parser();
+    
+    cc1 = parser.parse("src/test/resources/semdiff/CarCharging1.ucd").get();
+    cc2 = parser.parse("src/test/resources/semdiff/CarCharging2.ucd").get();
+    sf1 = parser.parse("src/test/resources/semdiff/SwimmyFish1.ucd").get();
+    sf2 = parser.parse("src/test/resources/semdiff/SwimmyFish2.ucd").get();
+    fbp = parser.parse("src/test/resources/semdiff/FeatureBroadcastPosition.ucd").get();
+    fn = parser.parse("src/test/resources/semdiff/FeatureNavigation.ucd").get();
+    ov = parser.parse("src/test/resources/semdiff/OperateVehicle.ucd").get();
+    opv = parser.parse("src/test/resources/semdiff/OperatePremiumVehicle.ucd").get();
+    se = parser.parse("src/test/resources/semdiff/SecurityEnterprise.ucd").get();
+    sec = parser.parse("src/test/resources/semdiff/SecurityEnterpriseCorrection.ucd").get();
+    vtol1 = parser.parse("src/test/resources/semdiff/VTOL1.ucd").get();
+    vtol2 = parser.parse("src/test/resources/semdiff/VTOL2.ucd").get();
+  }
+  
+  @BeforeEach
   public void setup() {
     LogStub.init();
     Log.enableFailQuick(false);

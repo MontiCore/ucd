@@ -3,8 +3,8 @@ package semdiff;
 
 import de.se_rwth.commons.logging.Log;
 import de.se_rwth.commons.logging.LogStub;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import ucd.UCDMill;
 import ucd._ast.ASTUCDArtifact;
 import ucd._ast.ASTUseCaseDiagram;
@@ -16,15 +16,15 @@ import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("all")
 public class SemDiffTest {
 
   private final UCDParser parser = UCDMill.parser();
 
-  @Before
+  @BeforeEach
   public void setup() {
     LogStub.init();
     Log.enableFailQuick(false);
