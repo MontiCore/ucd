@@ -10,7 +10,6 @@ plugins {
 group = "de.monticore.lang"
 version = mc_version
 description = "Use Case Diagram DSL"
-sourceCompatibility = JavaVersion.VERSION_21;
 
 dependencies {
   grammar ("de.monticore:monticore-grammar:$mc_version")
@@ -29,9 +28,9 @@ repositories {
         mavenLocal()
     }
     maven {
-        credentials.username mavenUser
-        credentials.password mavenPassword
-        url repo
+        credentials.username = mavenUser
+        credentials.password = mavenPassword
+        url = repo
     }
 }
 
@@ -46,13 +45,14 @@ java {
   toolchain {
     languageVersion = JavaLanguageVersion.of(21)
   }
+  sourceCompatibility = JavaVersion.VERSION_21;
 
   withSourcesJar()
   withJavadocJar()
 }
 
 // generated java doc contains errors, disable for now
-javadoc.failOnError(false)
+javadoc.failOnError = false
 
 
 shadowJar {
@@ -79,16 +79,19 @@ publishing {
         }
     }
     repositories.maven {
-        credentials.username mavenUser
-        credentials.password mavenPassword
+        credentials.username = mavenUser
+        credentials.password = mavenPassword
         def releasesRepoUrl = "https://nexus.se.rwth-aachen.de/content/repositories/monticore-releases/"
         def snapshotsRepoUrl = "https://nexus.se.rwth-aachen.de/content/repositories/monticore-snapshots/"
         url = version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
     }
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+tasks.withType(JavaCompile).configureEach {
+  options.fork = true
+  options.encoding = "UTF-8"
+  options.deprecation = false
+  options.warnings = false
 }
 
 // todo: reactivate this plugin when new version compatible to gradle 6.0.1 is available
@@ -96,15 +99,15 @@ tasks.withType(JavaCompile) {
 //    destination    = 'target/reports/visteg.dot'
 //}
 
-task testReport(type: TestReport) {
-    destinationDir = file("$buildDir/reports/allTests")
-    // Include the results from the 'test' task
-    reportOn tasks.withType(Test)
+tasks.register('testReport', TestReport) {
+  destinationDir = layout.buildDirectory.dir("reports/allTests")
+  // Include the results from the 'test' task
+  getTestResults().from(tasks.withType(Test))
 }
 
 
-task buildAll(type: GradleBuild) {
-  tasks = [ 'build' ]
+tasks.register('buildAll', GradleBuild) {
+  tasks = ['build']
 }
 
 defaultTasks 'build'
