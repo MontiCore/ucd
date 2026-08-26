@@ -14,10 +14,10 @@ import ucd._symboltable.UCDUseCaseSymbol;
 
 import java.io.IOException;
 import java.util.LinkedHashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UCDCLITest {
@@ -131,13 +131,13 @@ public class UCDCLITest {
     testModels.add("VTOL2");
 
     for (String model : testModels) {
-      Optional<ASTUCDArtifact> ast = cli.parseUCDArtifact("src/test/resources/semdiff/" + model +".ucd");
-      assertTrue(ast.isPresent());
-      String symbolFileName = "target/symbols/" + ast.get().getUseCaseDiagram().getName() + ".ucdsym";
-      cli.deriveSymbolSkeleton(ast.get());
-      UCDArtifactScope artifactScope = (UCDArtifactScope) ast.get().getEnclosingScope();
+      ASTUCDArtifact ast = cli.parse("src/test/resources/semdiff/" + model +".ucd");
+      assertNotNull(ast);
+      String symbolFileName = "target/symbols/" + ast.getUseCaseDiagram().getName() + ".ucdsym";
+      cli.createSymbolTable(ast);
+      UCDArtifactScope artifactScope = (UCDArtifactScope) ast.getEnclosingScope();
 
-      cli.storeSymbols(ast.get(), symbolFileName);
+      cli.storeSymbols((UCDArtifactScope) ast.getEnclosingScope(), symbolFileName);
       IUCDArtifactScope loadedST = cli.loadSymbols(symbolFileName);
 
       assertEquals(0, loadedST.getSubScopes().size());
