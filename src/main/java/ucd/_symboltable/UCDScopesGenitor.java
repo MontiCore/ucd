@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import de.monticore.symboltable.ImportStatement;
 import de.monticore.types.mcbasictypes._ast.ASTMCImportStatement;
 import ucd._ast.ASTUCDArtifact;
+import ucd._ast.ASTUseCaseDiagram;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class UCDScopesGenitor extends UCDScopesGenitorTOP {
     initArtifactScopeHP1(artifactScope);
     rootNode.accept(getTraverser());
     initArtifactScopeHP2(artifactScope);
+    artifactScope.setName(artifactScope.getDiagramSymbols().values().getFirst().getName());
     scopeStack.remove(artifactScope);
     return artifactScope;
   }
