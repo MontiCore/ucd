@@ -18,6 +18,7 @@ import ucd._cocos.SpecializesRefUCExists;
 import ucd._cocos.UC2ActorExists;
 import ucd._cocos.UCCapitalization;
 import ucd._cocos.UCDCoCoChecker;
+import ucd._cocos.UCExtendPreconditionIsBoolean;
 import ucd._cocos.UCPreconditionIsBoolean;
 import ucd._cocos.UniqueActorName;
 import ucd._cocos.UniqueUCName;
@@ -188,6 +189,7 @@ public class UCDTool extends UCDToolTOP {
     //checker.addCoCo(new UCPreconditionIsBoolean());
     checker.addCoCo(new ActorCapitalization());
     checker.addCoCo(new UCCapitalization());
+    //checker.addCoCo(new UCExtendPreconditionIsBoolean());
 
     checker.checkAll(ast);
   }

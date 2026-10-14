@@ -13,7 +13,7 @@ public class UCPreconditionIsBoolean implements UCDASTUCDUseCaseCoCo{
   public static final String ERROR_CODE = "0xC1205";
 
   protected static final String MESSAGE =
-    "The type of the precondition must be of type boolean but they are of type '%s'.";
+    "The type of the precondition must be of type boolean but it is of type '%s'.";
 
   @Override
   public void check(ASTUCDUseCase node){

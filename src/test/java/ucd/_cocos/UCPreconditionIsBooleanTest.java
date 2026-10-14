@@ -22,6 +22,7 @@ import static ucd._cocos.UCPreconditionIsBoolean.ERROR_CODE;
  * Discuss if this implicit introduction should remain:
  * If yes, add the respective symbol.
  * If no, discuss how it should be introduced instead.
+ * Furthermore, adjust the test cases accordingly and add more test cases.
   */
 
 
@@ -50,34 +51,6 @@ public class UCPreconditionIsBooleanTest extends UCDTestBase {
 //      arg("""
 //          usecasediagram ucd1 {
 //          @Player -- Play, Pay;
-//          @AndroidPlayer specializes Player;
-//          @IOSPlayer specializes Player;
-//          ShowAd extend Play [!isPremium];
-//          RegisterScore extend Play;
-//          abstract Pay include CheckPremium;
-//          CreditCard specializes Pay;
-//          Bank specializes Pay;
-//          ChangeProfilePicture [isPremium];
-//          }
-//        """),
-//      arg("""
-//          usecasediagram ucd2 {
-//          @Player -- Play, Pay;
-//          @actor2;
-//          @AndroidPlayer specializes Player;
-//          @IOSPlayer specializes actor2;
-//          ShowAd extend Play [!isPremium];
-//          RegisterScore extend Play;
-//          abstract Pay include CheckPremium;
-//          CreditCard specializes Pay;
-//          Bank specializes Pay;
-//          ChangeProfilePicture [isPremium];
-//          }
-//        """),
-//      arg("""
-//          usecasediagram ucd3 {
-//          @Player -- Play, Pay;
-//          @Player;
 //          @AndroidPlayer specializes Player;
 //          @IOSPlayer specializes Player;
 //          ShowAd extend Play [!isPremium];
@@ -139,23 +112,7 @@ public class UCPreconditionIsBooleanTest extends UCDTestBase {
 //          Pay;
 //          }
 //        """,
-//        new String[] {ERROR_CODE}),
-//      arg("""
-//          usecasediagram ucd2 {
-//          @Player -- Play, Pay;
-//          @AndroidPlayer specializes Player;
-//          @IOSPlayer specializes Player;
-//          ShowAd extend Play [!isPremium];
-//          RegisterScore extend Play;
-//          abstract Pay include CheckPremium;
-//          CreditCard specializes Pay;
-//          Bank specializes Pay;
-//          ChangeProfilePicture [isPremium];
-//          Pay;
-//          RegisterScore;
-//          }
-//        """,
-//        new String[] {ERROR_CODE, ERROR_CODE})
+//        new String[] {ERROR_CODE})
 //    );
 //  }
 }
