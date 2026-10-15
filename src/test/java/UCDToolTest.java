@@ -1,8 +1,8 @@
+/* (c) https://github.com/MontiCore/monticore */
 import de.se_rwth.commons.logging.Log;
 import org.junit.jupiter.api.Test;
 import ucd.UCDTestBase;
 import ucd.UCDTool;
-import ucd._ast.ASTUCDActor;
 import ucd._ast.ASTUCDArtifact;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

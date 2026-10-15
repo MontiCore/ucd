@@ -1,8 +1,8 @@
+/* (c) https://github.com/MontiCore/monticore */
 package ucd._cocos;
 
 import com.google.common.base.Preconditions;
 import de.se_rwth.commons.logging.Log;
-import org.antlr.v4.runtime.misc.NotNull;
 import ucd._ast.ASTUCDUseCase;
 
 public class ExtendRefUCExists implements UCDASTUCDUseCaseCoCo{

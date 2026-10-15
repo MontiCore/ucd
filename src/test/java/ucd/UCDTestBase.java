@@ -1,3 +1,4 @@
+/* (c) https://github.com/MontiCore/monticore */
 package ucd;
 
 import com.google.common.base.Preconditions;
@@ -11,14 +12,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.provider.Arguments;
 import ucd._ast.ASTUCDArtifact;
+import ucd.check.UCDTypeCheck;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
-//import static org.assertj.core.api.Assertions.assertThat;
 
 public class UCDTestBase {
   /**
@@ -43,6 +43,8 @@ public class UCDTestBase {
   protected static void initMill() {
     UCDMill.init();
     UCDMill.globalScope().clear();
+
+    UCDTypeCheck.init();
   }
 
   @BeforeEach

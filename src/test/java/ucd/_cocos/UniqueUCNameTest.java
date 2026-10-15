@@ -1,3 +1,4 @@
+/* (c) https://github.com/MontiCore/monticore */
 package ucd._cocos;
 
 import com.google.common.base.Preconditions;
