@@ -56,9 +56,9 @@ public class SpecializedActorExistsTest extends UCDTestBase {
       arg("""
           usecasediagram ucd2 {
           @Player -- Play, Pay;
-          @actor2;
+          @Actor2;
           @AndroidPlayer specializes Player;
-          @IOSPlayer specializes actor2;
+          @IOSPlayer specializes Actor2;
           ShowAd extend Play [!isPremium];
           RegisterScore extend Play;
           abstract Pay include CheckPremium;
@@ -120,7 +120,7 @@ public class SpecializedActorExistsTest extends UCDTestBase {
     return Stream.of(
       arg("""
           usecasediagram ucd1 {
-          @actor1 -- Play, Pay;
+          @Actor1 -- Play, Pay;
           @AndroidPlayer specializes Player;
           @IOSPlayer specializes Player;
           ShowAd extend Play [!isPremium];
@@ -134,9 +134,9 @@ public class SpecializedActorExistsTest extends UCDTestBase {
         new String[] {ERROR_CODE, ERROR_CODE}),
       arg("""
           usecasediagram ucd2 {
-          @actor1 -- Play, Pay;
+          @Actor1 -- Play, Pay;
           @AndroidPlayer specializes Player;
-          @IOSPlayer specializes actor2;
+          @IOSPlayer specializes Actor2;
           ShowAd extend Play [!isPremium];
           RegisterScore extend Play;
           abstract Pay include CheckPremium;
@@ -148,9 +148,9 @@ public class SpecializedActorExistsTest extends UCDTestBase {
         new String[] {ERROR_CODE, ERROR_CODE}),
       arg("""
           usecasediagram ucd3 {
-          @actor1 -- Play, Pay;
+          @Actor1 -- Play, Pay;
           @AndroidPlayer specializes Player;
-          @IOSPlayer specializes actor1;
+          @IOSPlayer specializes Actor1;
           ShowAd extend Play [!isPremium];
           RegisterScore extend Play;
           abstract Pay include CheckPremium;
@@ -162,10 +162,10 @@ public class SpecializedActorExistsTest extends UCDTestBase {
         new String[] {ERROR_CODE}),
       arg("""
           usecasediagram ucd4 {
-          @actor1 -- Play, Pay;
-          @actor1;
+          @Actor1 -- Play, Pay;
+          @Actor1;
           @AndroidPlayer specializes Player;
-          @IOSPlayer specializes actor1;
+          @IOSPlayer specializes Actor1;
           ShowAd extend Play [!isPremium];
           RegisterScore extend Play;
           abstract Pay include CheckPremium;
@@ -179,8 +179,8 @@ public class SpecializedActorExistsTest extends UCDTestBase {
           usecasediagram ucd5 {
           @Player -- Play, Pay;
           @Player;
-          @AndroidPlayer specializes actor1;
-          @IOSPlayer specializes actor1;
+          @AndroidPlayer specializes Actor1;
+          @IOSPlayer specializes Actor1;
           ShowAd extend Play [!isPremium];
           RegisterScore extend Play;
           abstract Pay include CheckPremium;

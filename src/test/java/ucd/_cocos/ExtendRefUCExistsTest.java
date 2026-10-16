@@ -7,6 +7,7 @@ import de.se_rwth.commons.logging.Log;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ucd.UCDMill;
 import ucd.UCDTestBase;
 import ucd._ast.ASTUCDArtifact;
 
@@ -24,6 +25,7 @@ public class ExtendRefUCExistsTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("Play").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
@@ -50,7 +52,6 @@ public class ExtendRefUCExistsTest extends UCDTestBase {
           CreditCard specializes Pay;
           Bank specializes Pay;
           ChangeProfilePicture [isPremium];
-          Play;
           }
         """),
       arg("""
@@ -64,7 +65,6 @@ public class ExtendRefUCExistsTest extends UCDTestBase {
           CreditCard specializes Pay;
           Bank specializes Pay;
           ChangeProfilePicture [isPremium];
-          Play;
           }
         """)
     );
@@ -109,8 +109,8 @@ public class ExtendRefUCExistsTest extends UCDTestBase {
             @Player -- Play, Pay;
             @AndroidPlayer specializes Player;
             @IOSPlayer specializes Player;
-            ShowAd extend Play [!isPremium];
-            RegisterScore extend Play;
+            ShowAd extend Game [!isPremium];
+            RegisterScore extend Game;
             abstract Pay include CheckPremium;
             CreditCard specializes Pay;
             Bank specializes Pay;
@@ -123,7 +123,7 @@ public class ExtendRefUCExistsTest extends UCDTestBase {
             @Player -- Play, Pay;
             @AndroidPlayer specializes Player;
             @IOSPlayer specializes Player;
-            ShowAd extend Play [!isPremium];
+            ShowAd extend Game [!isPremium];
             RegisterScore extend Scoreboard;
             abstract Pay include CheckPremium;
             CreditCard specializes Pay;
@@ -137,7 +137,7 @@ public class ExtendRefUCExistsTest extends UCDTestBase {
             @Player -- Play, Pay;
             @AndroidPlayer specializes Player;
             @IOSPlayer specializes Player;
-            ShowAd extend Play [!isPremium];
+            ShowAd extend Game [!isPremium];
             RegisterScore extend Bank;
             abstract Pay include CheckPremium;
             CreditCard specializes Pay;

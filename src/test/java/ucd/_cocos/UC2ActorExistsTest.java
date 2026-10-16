@@ -7,6 +7,7 @@ import de.se_rwth.commons.logging.Log;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ucd.UCDMill;
 import ucd.UCDTestBase;
 import ucd._ast.ASTUCDArtifact;
 
@@ -24,6 +25,7 @@ public class UC2ActorExistsTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("Play").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
@@ -50,7 +52,6 @@ public class UC2ActorExistsTest extends UCDTestBase {
           CreditCard specializes Pay;
           Bank specializes Pay;
           ChangeProfilePicture [isPremium];
-          Play;
           }
         """),
       arg("""
@@ -78,7 +79,6 @@ public class UC2ActorExistsTest extends UCDTestBase {
           CreditCard specializes Pay;
           Bank specializes Pay;
           ChangeProfilePicture [isPremium];
-          Play;
           }
         """)
     );
@@ -120,7 +120,7 @@ public class UC2ActorExistsTest extends UCDTestBase {
     return Stream.of(
       arg("""
           usecasediagram ucd1 {
-          @actor1 -- Play, Pay;
+          @Actor1 -- Play, Pay;
           @AndroidPlayer specializes Player;
           @IOSPlayer specializes Player;
           ShowAd extend Play [!isPremium];
@@ -134,7 +134,7 @@ public class UC2ActorExistsTest extends UCDTestBase {
         new String[] {ERROR_CODE}),
       arg("""
           usecasediagram ucd2 {
-          @actor1 -- Play, Pay;
+          @Actor1 -- Play, Pay;
           @AndroidPlayer specializes Player;
           @IOSPlayer specializes actor2;
           ShowAd extend Play [!isPremium];
@@ -148,7 +148,7 @@ public class UC2ActorExistsTest extends UCDTestBase {
       arg("""
           usecasediagram ucd3 {
           @Player -- Play, Pay;
-          @actor1 -- CreditCard;
+          @Actor1 -- CreditCard;
           @AndroidPlayer specializes Player;
           @IOSPlayer specializes actor1;
           ShowAd extend Play [!isPremium];
@@ -163,7 +163,7 @@ public class UC2ActorExistsTest extends UCDTestBase {
       arg("""
           usecasediagram ucd4 {
           @Player -- Play, Pay;
-          @actor1 -- Play;
+          @Actor1 -- Play;
           @AndroidPlayer specializes Player;
           @IOSPlayer specializes actor1;
           ShowAd extend Play [!isPremium];

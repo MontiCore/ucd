@@ -7,6 +7,7 @@ import de.se_rwth.commons.logging.Log;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ucd.UCDMill;
 import ucd.UCDTestBase;
 import ucd._ast.ASTUCDArtifact;
 
@@ -24,6 +25,8 @@ public class UCCapitalizationTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("Play").build());
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("CheckPremium").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
@@ -50,7 +53,6 @@ public class UCCapitalizationTest extends UCDTestBase {
           CreditCard specializes Pay;
           Bank specializes Pay;
           ChangeProfilePicture [isPremium];
-          CheckPremium;
           }
         """)
     );
@@ -62,6 +64,8 @@ public class UCCapitalizationTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("Play").build());
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("CheckPremium").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();

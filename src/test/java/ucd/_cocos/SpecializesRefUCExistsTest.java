@@ -7,6 +7,7 @@ import de.se_rwth.commons.logging.Log;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ucd.UCDMill;
 import ucd.UCDTestBase;
 import ucd._ast.ASTUCDArtifact;
 
@@ -24,6 +25,7 @@ public class SpecializesRefUCExistsTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("Building").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
@@ -63,7 +65,6 @@ public class SpecializesRefUCExistsTest extends UCDTestBase {
           CreditCard specializes Pay;
           Bank specializes Building;
           ChangeProfilePicture [isPremium];
-          Building;
           }
         """)
     );

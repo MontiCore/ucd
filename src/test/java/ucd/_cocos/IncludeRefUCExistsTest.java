@@ -7,6 +7,7 @@ import de.se_rwth.commons.logging.Log;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ucd.UCDMill;
 import ucd.UCDTestBase;
 import ucd._ast.ASTUCDArtifact;
 
@@ -24,6 +25,8 @@ public class IncludeRefUCExistsTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("CheckPremium").build());
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("BankTransfer").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
@@ -50,7 +53,6 @@ public class IncludeRefUCExistsTest extends UCDTestBase {
           CreditCard specializes Pay;
           Bank specializes Pay;
           ChangeProfilePicture [isPremium];
-          CheckPremium;
           }
         """),
       arg("""
@@ -64,9 +66,7 @@ public class IncludeRefUCExistsTest extends UCDTestBase {
           CreditCard specializes Pay;
           Bank specializes Pay;
           ChangeProfilePicture [isPremium];
-          CheckPremium;
           Pay include BankTransfer;
-          BankTransfer;
           }
         """)
     );
@@ -78,6 +78,7 @@ public class IncludeRefUCExistsTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("OrderCheck").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
@@ -142,11 +143,10 @@ public class IncludeRefUCExistsTest extends UCDTestBase {
             @IOSPlayer specializes actor1;
             ShowAd extend Play [!isPremium];
             RegisterScore extend Bank;
-            abstract Pay include CheckPremium;
+            abstract Pay include OrderCheck;
             CreditCard specializes Pay;
             Bank specializes Pay;
             ChangeProfilePicture [isPremium];
-            CheckPremium;
             Pay include BankTransfer;
             }
           """,

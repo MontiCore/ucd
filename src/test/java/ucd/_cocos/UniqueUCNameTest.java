@@ -7,6 +7,7 @@ import de.se_rwth.commons.logging.Log;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ucd.UCDMill;
 import ucd.UCDTestBase;
 import ucd._ast.ASTUCDArtifact;
 
@@ -24,6 +25,8 @@ public class UniqueUCNameTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("Play").build());
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("CheckPremium").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
@@ -55,9 +58,9 @@ public class UniqueUCNameTest extends UCDTestBase {
       arg("""
           usecasediagram ucd2 {
           @Player -- Play, Pay;
-          @actor2;
+          @Actor2;
           @AndroidPlayer specializes Player;
-          @IOSPlayer specializes actor2;
+          @IOSPlayer specializes Actor2;
           ShowAd extend Play [!isPremium];
           RegisterScore extend Play;
           abstract Pay include CheckPremium;
@@ -89,6 +92,8 @@ public class UniqueUCNameTest extends UCDTestBase {
     Preconditions.checkNotNull(model);
 
     // Given
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("Play").build());
+    UCDMill.globalScope().add(UCDMill.uCDUseCaseSymbolBuilder().setName("CheckPremium").build());
     ASTUCDArtifact ast = compile(model);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
@@ -147,7 +152,23 @@ public class UniqueUCNameTest extends UCDTestBase {
           RegisterScore;
           }
         """,
-        new String[] {ERROR_CODE, ERROR_CODE})
+        new String[] {ERROR_CODE, ERROR_CODE}),
+      arg("""
+          usecasediagram ucd3 {
+          @Player -- Play, Pay;
+          @AndroidPlayer specializes Player;
+          @IOSPlayer specializes Player;
+          ShowAd extend Play [!isPremium];
+          RegisterScore extend Play;
+          abstract Pay include CheckPremium;
+          CreditCard specializes Pay;
+          Bank specializes Pay;
+          ChangeProfilePicture [isPremium];
+          Pay;
+          Play;
+          }
+        """,
+        new String[] {ERROR_CODE})
     );
   }
 }
