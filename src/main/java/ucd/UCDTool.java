@@ -179,10 +179,10 @@ public class UCDTool extends UCDToolTOP {
     Preconditions.checkNotNull(ast);
 
     UCDCoCoChecker checker = new UCDCoCoChecker();
-    checker.addCoCo(new UniqueUCName());
     checker.addCoCo(new UniqueActorName());
     checker.addCoCo(new ActorCapitalization());
     checker.addCoCo(new UCCapitalization());
+    checker.addCoCo(new SpecializedActorExists());
 
     checker.checkAll(ast);
   }

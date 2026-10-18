@@ -8,6 +8,14 @@ import ucd._symboltable.UCDActorSymbol;
 
 import java.util.List;
 
+/**
+ * Context condition that checks whether actor names are unique within the
+ * model.
+ *
+ * <p>For each actor, this CoCo checks whether another actor with the same
+ * name has already been defined. If a duplicate actor name is found, an
+ * error is reported.
+ */
 public class UniqueActorName implements UCDASTUCDActorCoCo {
   public static final String ERROR_CODE = "0xC1204";
 

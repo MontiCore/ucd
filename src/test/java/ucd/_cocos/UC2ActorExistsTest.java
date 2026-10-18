@@ -18,6 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ucd._cocos.UC2ActorExists.ERROR_CODE;
 
+/**
+ * Tests for the {@link UC2ActorExists} context condition.
+ *
+ * <p>These tests verify that the CoCo reports errors when an actor references
+ * a use case that cannot be resolved in the scope and does not report errors
+ * when the corresponding use case symbol exists.
+ *
+ * <p>The tests are based on a different semantic interpretation in which
+ * use cases referenced by actors must already exist as symbols in the scope
+ * rather than being introduced implicitly by actor associations.
+ */
 public class UC2ActorExistsTest extends UCDTestBase {
   @ParameterizedTest
   @MethodSource("validModels")

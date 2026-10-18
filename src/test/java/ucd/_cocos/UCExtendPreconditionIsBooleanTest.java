@@ -21,7 +21,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ucd._cocos.UCExtendPreconditionIsBoolean.ERROR_CODE;
 
-
+/**
+ * Tests for the {@link UCExtendPreconditionIsBoolean} context condition.
+ *
+ * <p>These tests verify that the CoCo reports errors when the precondition
+ * of an {@code extend} relationship is not of type {@code boolean} and does
+ * not report errors when the precondition has the correct type.
+ *
+ * <p>The tests are based on a different semantic interpretation in which
+ * variables used in preconditions are not implicitly introduced as boolean
+ * variables. Instead, these variables must already exist as symbols in the
+ * scope with an explicitly defined type.
+ */
 public class UCExtendPreconditionIsBooleanTest extends UCDTestBase {
     @ParameterizedTest
     @MethodSource("validModels")

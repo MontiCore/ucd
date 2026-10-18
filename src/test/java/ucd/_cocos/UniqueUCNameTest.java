@@ -18,6 +18,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ucd._cocos.UniqueUCName.ERROR_CODE;
 
+/**
+ * Tests for the {@link UniqueUCName} context condition.
+ *
+ * <p>These tests verify that the CoCo reports errors when a use case name
+ * is used more than once in the use case diagram and does not report errors
+ * when all use case names are unique.
+ *
+ * <p>The tests are based on a different semantic interpretation in which
+ * use cases introduced implicitly through relationships are not considered
+ * by this CoCo. Therefore, the CoCo checks only explicitly defined use cases
+ * for duplicate names.
+ */
 public class UniqueUCNameTest extends UCDTestBase {
   @ParameterizedTest
   @MethodSource("validModels")

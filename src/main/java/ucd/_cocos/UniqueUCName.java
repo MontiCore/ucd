@@ -8,6 +8,21 @@ import ucd._symboltable.UCDUseCaseSymbol;
 
 import java.util.List;
 
+/**
+ * Context condition that checks whether use case names are unique within
+ * the use case diagram.
+ *
+ * <p>This CoCo resolves all use case symbols with the same name and checks
+ * whether another use case with that name has already been defined. If a
+ * duplicate definition is found, an error is reported.
+ *
+ * <p>This CoCo implements a different semantic interpretation of use case
+ * names than the language's implicit introduction mechanism. It assumes
+ * that use case symbols correspond to explicitly defined use cases and
+ * does not account for implicitly introduced use cases when checking name
+ * uniqueness.
+ */
+
 public class UniqueUCName implements  UCDASTUCDUseCaseCoCo {
   public static final String ERROR_CODE = "0xC1203";
 

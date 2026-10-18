@@ -9,6 +9,14 @@ import ucd._symboltable.UCDActorSymbol;
 
 import java.util.List;
 
+/**
+ * Context condition that checks whether all actors referenced by an actor
+ * specialization exist in the model.
+ *
+ * <p>For each actor, this CoCo checks whether every actor referenced in its
+ * {@code specializes} relationship can be resolved in the enclosing scope.
+ * If a referenced actor does not exist, an error is reported.
+ */
 public class SpecializedActorExists implements UCDASTUCDActorCoCo{
   public static final String ERROR_CODE = "0xC1206";
 

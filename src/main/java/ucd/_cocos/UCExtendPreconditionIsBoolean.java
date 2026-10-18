@@ -10,6 +10,20 @@ import ucd._ast.ASTUCDExtend;
 
 import static de.monticore.codegen.CodeGenVisitorState.LOG_NAME;
 
+/**
+ * Context condition that checks the extend precondition of an use case is of
+ * type {@code boolean}.
+ *
+ * <p>This CoCo determines the type of the precondition expression and checks
+ * whether it is a boolean type. If the type is not boolean, an error is
+ * reported. Expressions with an obscure type are skipped.
+ *
+ * <p>This CoCo implements a different semantic interpretation of use cases and
+ * assumes that preconditions are introduced explicitly.
+ * It does not handle the implicit introduction of preconditions.
+ * Therefore, preconditions that would otherwise be introduced implicitly may not be
+ * considered by this CoCo.
+ */
 public class UCExtendPreconditionIsBoolean implements UCDASTUCDExtendCoCo {
   public static final String ERROR_CODE = "0xC1209";
 

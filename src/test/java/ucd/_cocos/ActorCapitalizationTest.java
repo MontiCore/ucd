@@ -17,6 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ucd._cocos.ActorCapitalization.ERROR_CODE;
 
+/**
+ * Tests for the {@link ActorCapitalization} context condition.
+ *
+ * <p>These tests verify that the CoCo does not report errors when all actor
+ * names start with an uppercase letter and reports an error for each actor
+ * whose name starts with a lowercase letter.
+ */
 public class ActorCapitalizationTest extends UCDTestBase {
   @ParameterizedTest
   @MethodSource("validModels")

@@ -18,6 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ucd._cocos.ExtendRefUCExists.ERROR_CODE;
 
+/**
+ * Tests for the {@link ExtendRefUCExists} context condition.
+ *
+ * <p>These tests verify that the CoCo reports errors when a
+ * referenced use case cannot be resolved in the scope and does not report
+ * errors when the corresponding symbol exists.
+ *
+ * <p>The tests are based on a different semantic interpretation in which
+ * use cases referenced by relationships must already exist as symbols in
+ * the scope rather than being introduced implicitly by the relationships.
+ */
 public class ExtendRefUCExistsTest extends UCDTestBase {
   @ParameterizedTest
   @MethodSource("validModels")

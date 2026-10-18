@@ -17,6 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ucd._cocos.UniqueActorName.ERROR_CODE;
 
+/**
+ * Tests for the {@link UniqueActorName} context condition.
+ *
+ * <p>These tests verify that the CoCo does not report errors when all actor
+ * names are unique and reports an error for each actor whose name has already
+ * been defined.
+ */
 public class UniqueActorNameTest extends UCDTestBase {
   @ParameterizedTest
   @MethodSource("validModels")
