@@ -87,8 +87,29 @@ The grammar extends the grammars
 * [MCCommonLiterals][MCCommonLiteralsRef] to be able to use boolean literals in expressions.
 
 ## Context Conditions
+The UCD language defines context conditions (CoCos) to check the well-formedness of UCD models. 
+These checks complement the syntactic constraints enforced by the grammar by validating semantic properties of the models.
 
-There are not context conditions for the language.
+The following CoCos are implemented for the UCD language:
+
+
+| CoCo                                                                                       | Description                                                                        | Registered |
+|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------|
+| **[UniqueUCName](../java/ucd/_cocos/UniqueUCName.java)**                                   | Checks whether the names of all use cases in a UCD are unique.                     | &cross;    |
+| **[UniqueActorName](../java/ucd/_cocos/UniqueActorName.java)**                             | Checks whether the names of all actors in a UCD are unique.                        | &check;    |
+| **[UCCapitalization](../java/ucd/_cocos/UCCapitalization.java)**                           | Checks whether the names of all use cases in a UCD start with an uppercase letter. | &check;    |
+| **[ActorCapitalization](../java/ucd/_cocos/ActorCapitalization.java)**                     | Checks whether the names of all actors in a UCD start with an uppercase letter.    | &check;    |
+| **[UC2ActorExists](../java/ucd/_cocos/UC2ActorExists.java)**                               | Checks whether the referenced use case exists in the UCD for each actor.           | &cross;    |
+| **[ExtendRefUCExists](../java/ucd/_cocos/ExtendRefUCExists.java)**                         | Checks whether the use case in an extend relation exists in the UCD.               | &cross;    |
+| **[IncludeRefUCExists](../java/ucd/_cocos/IncludeRefUCExists.java)**                       | Checks whether the use case in an include relation exists in the UCD.              | &cross;    |
+| **[SpecializesRefUCExists](../java/ucd/_cocos/SpecializesRefUCExists.java)**               | Checks whether the use case in a specializes relation exists in the UCD.           | &cross;    |
+| **[SpecializedActorExists](../java/ucd/_cocos/SpecializedActorExists.java)**               | Checks whether the actor in a specializes relation exists in the UCD.              | &check;    |
+| **[UCPreconditionIsBoolean](../java/ucd/_cocos/UCPreconditionIsBoolean.java)**             | Checks whether the precondition of a use case is of tpe boolean.                   | &cross;    |
+| **[UCExtendPreconditionIsBoolean](../java/ucd/_cocos/UCExtendPreconditionIsBoolean.java)** | Checks whether the precondition of an extend relation is of type boolean.          | &cross;    |
+
+[!Note]
+All listed CoCos are implemented, but only a subset is registered in the UCD language. 
+The CoCos marked with a **cross** are not registered because they assume that model elements are explicitly defined, whereas the current language semantics allow elements to be introduced implicitly through relationships.
 
 ## Symbol Table
 
