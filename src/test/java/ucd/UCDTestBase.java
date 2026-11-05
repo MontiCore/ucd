@@ -14,7 +14,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import ucd._ast.ASTUCDArtifact;
 import ucd.check.UCDTypeCheck;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -72,14 +71,10 @@ public class UCDTestBase {
 
   public static ASTUCDArtifact compile(@NotNull String model) {
     Preconditions.checkNotNull(model);
-    try {
-      ASTUCDArtifact ast = UCDMill.parser().parse_StringUCDArtifact(model)
-        .orElseThrow(() -> new IllegalStateException(Log.getFindings().toString()));
-      UCDMill.scopesGenitorDelegator().createFromAST(ast);
-      return ast;
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    ASTUCDArtifact ast = UCDMill.parser().parse_StringUCDArtifact(model)
+      .orElseThrow(() -> new IllegalStateException(Log.getFindings().toString()));
+    UCDMill.scopesGenitorDelegator().createFromAST(ast);
+    return ast;
   }
 
 
