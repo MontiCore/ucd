@@ -11,11 +11,11 @@ public class UCDToolTest extends UCDTestBase {
   @Test
   public void testUCDTool() {
     String model = """
-          usecasediagram ucd1 {
+          <<stereotype>> usecasediagram ucd1 {
           @Player -- Play, Pay;
           @AndroidPlayer specializes Player;
-          @IOSPlayer specializes Player;
-          ShowAd extend Play [!isPremium];
+          <<stereotype>> @IOSPlayer specializes Player;
+          <<stereotype>> ShowAd extend Play [!isPremium];
           RegisterScore extend Play;
           abstract Pay include CheckPremium;
           CreditCard specializes Pay;
