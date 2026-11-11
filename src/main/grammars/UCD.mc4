@@ -18,7 +18,8 @@
  *    preconditions for use cases or conditions on extend relations. 
  *  * MCCommonLiterals for reusing literals (i.e., BooleanLiteral).
  */
-grammar UCD extends de.monticore.symbols.BasicSymbols, 
+grammar UCD extends de.monticore.symbols.BasicSymbols,
+                    de.monticore.UMLStereotype,
                     de.monticore.types.MCBasicTypes, 
                     de.monticore.expressions.CommonExpressions, 
                     de.monticore.literals.MCCommonLiterals {
@@ -41,7 +42,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    * @attribute UCDElement Elements contained in the diagram. 
    */ 
   UseCaseDiagram implements Diagram =
-    "usecasediagram" Name "{"
+    Stereotype? "usecasediagram" Name "{"
       UCDElement*
     "}";
 
@@ -65,7 +66,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    * @attribute incl List of use cases included by the use case.
    */
   symbol UCDUseCase implements UCDElement =
-    ["abstract"]? Name ("[" Expression "]")?
+    Stereotype? ["abstract"]? Name ("[" Expression "]")?
     ("specializes" sup:(Name@UCDUseCase || ",")+)?
     ("extend" (UCDExtend || ",")+ )?
     ("include" incl:(Name@UCDUseCase || ",")+ )?
@@ -95,7 +96,7 @@ grammar UCD extends de.monticore.symbols.BasicSymbols,
    *            defined via the usage of UCDUseCase).
    */
   symbol UCDActor implements UCDElement =
-    ["abstract"]? "@" Name
+    Stereotype? ["abstract"]? "@" Name
     ("specializes" sup:(Name@UCDActor || ",")+)?
     ("--" uc:(Name@UCDUseCase || ",")+)?
     ";";
