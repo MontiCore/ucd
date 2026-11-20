@@ -5,7 +5,6 @@ import com.google.common.collect.Sets;
 import de.monticore.expressions.commonexpressions._ast.*;
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.monticore.expressions.expressionsbasis._ast.ASTLiteralExpression;
-import de.monticore.expressions.expressionsbasis._ast.ASTNameExpression;
 import de.monticore.literals.mccommonliterals._ast.ASTBooleanLiteral;
 import de.monticore.literals.mcliteralsbasis._ast.ASTLiteral;
 import de.se_rwth.commons.logging.Log;
@@ -47,8 +46,8 @@ public class Formulas {
       res.addAll(allUsedVariables(((ASTLogicalNotExpression) ast).getExpression()));
       return res;
     }
-    else if (ast instanceof ASTNameExpression) {
-      res.add(((ASTNameExpression) ast).getName());
+    else if (ast instanceof ASTQualifiedNameExpression) {
+      res.add(((ASTQualifiedNameExpression) ast).getMCQualifiedName().getQName());
       return res;
     }
     else if (ast instanceof ASTLiteralExpression) {
@@ -87,8 +86,8 @@ public class Formulas {
       ASTExpression expr = ((ASTLogicalNotExpression) ast).getExpression();
       return !evaluate(expr, val);
     }
-    else if (ast instanceof ASTNameExpression) {
-      String name = ((ASTNameExpression) ast).getName();
+    else if (ast instanceof ASTQualifiedNameExpression) {
+      String name = ((ASTQualifiedNameExpression) ast).getMCQualifiedName().getQName();
       return val.contains(name);
     }
     else if (ast instanceof ASTLiteralExpression) {
